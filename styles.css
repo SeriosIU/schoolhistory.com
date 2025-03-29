@@ -1,1 +1,21 @@
-
+.leaders-grid {
+    display: flex; /* Вместо grid */
+    gap: 20px;
+    overflow-x: auto; /* Горизонтальный скролл при необходимости */
+    padding-bottom: 20px; /* Для скроллбара */
+    scrollbar-width: thin; /* Стилизация скроллбара */
+    scrollbar-color: var(--primary) var(--light);
+}
+.leaders-grid .card {
+    flex: 0 0 auto; /* Не сжимать и не растягивать */
+    width: 250px; /* Фиксированная ширина */
+}
+@media (max-width: 768px) {
+    .leaders-grid {
+        -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
+    }
+    
+    .leaders-grid .card {
+        width: 220px; /* Немного уменьшаем ширину */
+    }
+}
