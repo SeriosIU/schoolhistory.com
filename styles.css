@@ -9,7 +9,7 @@
     min-width: 200px; /* Минимальная ширина */
     max-width: 250px; /* Максимальная ширина */
 }
-@media (max-width: 768px) {
+media (max-width: 768px) {
     .leaders-grid .card {
         min-width: 150px;
         max-width: 100%; /* На узких экранах карточки занимают всю ширину */
