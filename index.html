@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- Настройки страницы -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>МБОУ СОШ №25</title>
+    
+    <!-- Подключаем иконки -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Стили сайта -->
     <style>
+        /* Основные цвета сайта - можно поменять */
         :root {
-            --primary: #2c5aa0;
-            --secondary: #4a90e2;
-            --accent: #ff6b6b;
-            --light: #f8f9fa;
-            --dark: #343a40;
+            --blue: #2c5aa0;       /* Основной синий */
+            --light-blue: #4a90e2; /* Светлый синий */
+            --red: #ff6b6b;        /* Акцентный красный */
+            --white: #ffffff;      /* Белый */
+            --gray: #f8f9fa;      /* Светло-серый фон */
+            --dark: #343a40;      /* Темный текст */
         }
         
+        /* Общие стили для всех элементов */
         * {
             margin: 0;
             padding: 0;
@@ -22,19 +30,21 @@
         }
         
         body {
-            background-color: var(--light);
+            background-color: var(--gray);
             color: var(--dark);
             line-height: 1.6;
         }
         
+        /* Шапка сайта */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
+            background: linear-gradient(135deg, var(--blue), var(--light-blue));
+            color: var(--white);
             text-align: center;
             padding: 100px 20px 80px;
             position: relative;
         }
         
+        /* Декоративный элемент в шапке */
         header::after {
             content: '';
             position: absolute;
@@ -42,29 +52,33 @@
             left: 0;
             width: 100%;
             height: 100px;
-            background-color: var(--light);
+            background-color: var(--gray);
             clip-path: polygon(0 0, 100% 70%, 100% 100%, 0% 100%);
         }
         
+        /* Заголовок школы */
         h1 {
             font-size: 2.5rem;
             margin-bottom: 20px;
         }
         
+        /* Подзаголовок под названием школы */
         .subtitle {
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto 30px;
         }
         
+        /* Меню навигации */
         nav {
-            background-color: white;
+            background-color: var(--white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 100;
         }
         
+        /* Контейнер для ссылок меню */
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -73,6 +87,7 @@
             flex-wrap: wrap;
         }
         
+        /* Стили для ссылок в меню */
         .nav-link {
             padding: 20px;
             text-decoration: none;
@@ -82,10 +97,12 @@
             position: relative;
         }
         
+        /* Как ссылки выглядят при наведении */
         .nav-link:hover {
-            color: var(--primary);
+            color: var(--blue);
         }
         
+        /* Подчеркивание ссылок при наведении */
         .nav-link::after {
             content: '';
             position: absolute;
@@ -93,7 +110,7 @@
             left: 20px;
             width: 0;
             height: 2px;
-            background-color: var(--accent);
+            background-color: var(--red);
             transition: all 0.3s ease;
         }
         
@@ -101,12 +118,14 @@
             width: calc(100% - 40px);
         }
         
+        /* Стили для всех разделов */
         section {
             padding: 80px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
         
+        /* Заголовки разделов */
         .section-title {
             text-align: center;
             margin-bottom: 50px;
@@ -115,11 +134,12 @@
         
         .section-title h2 {
             font-size: 2rem;
-            color: var(--primary);
+            color: var(--blue);
             display: inline-block;
             padding-bottom: 10px;
         }
         
+        /* Красная линия под заголовком */
         .section-title h2::after {
             content: '';
             position: absolute;
@@ -128,40 +148,52 @@
             transform: translateX(-50%);
             width: 80px;
             height: 3px;
-            background-color: var(--accent);
+            background-color: var(--red);
         }
         
-        /* Изменения для отображения 4 карточек в ряд */
+        /* Сетка для карточек руководителей (5 в ряд) */
         .leaders-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 колонки */
-            gap: 20px;
+            grid-template-columns: repeat(5, 1fr); /* 5 колонок */
+            gap: 15px; /* Расстояние между карточками */
         }
         
+        /* Сетка для учителей-выпускников */
         .teachers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
         
+        /* Сетка для фотоархива (3 колонки) */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        /* Общие стили для всех карточек */
         .card {
-            background-color: white;
+            background-color: var(--white);
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
         }
         
+        /* Анимация карточек при наведении */
         .card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
         
+        /* Контейнер для изображений в карточках */
         .card-img {
-            height: 200px; /* Уменьшил высоту для компактности */
+            height: 200px; /* Фиксированная высота для изображений */
             overflow: hidden;
         }
         
+        /* Стили для изображений */
         .card-img img {
             width: 100%;
             height: 100%;
@@ -169,28 +201,31 @@
             transition: all 0.5s ease;
         }
         
+        /* Увеличение изображения при наведении */
         .card:hover .card-img img {
             transform: scale(1.1);
         }
         
+        /* Стили для текста в карточках */
         .card-content {
-            padding: 15px; /* Уменьшил отступы */
+            padding: 15px;
         }
         
         .card-content h3 {
-            color: var(--primary);
+            color: var(--blue);
             margin-bottom: 8px;
-            font-size: 1.1rem; /* Уменьшил размер шрифта */
+            font-size: 1rem;
         }
         
         .card-content p {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: #666;
-            font-size: 0.9rem; /* Уменьшил размер шрифта */
+            font-size: 0.85rem;
         }
         
+        /* Стили для блока истории */
         .history-item {
-            background-color: white;
+            background-color: var(--white);
             padding: 30px;
             border-radius: 8px;
             margin-bottom: 30px;
@@ -198,13 +233,14 @@
         }
         
         .history-item h3 {
-            color: var(--primary);
+            color: var(--blue);
             margin-bottom: 15px;
         }
         
+        /* Стили для блока олимпиады */
         .olympiad {
-            background-color: var(--primary);
-            color: white;
+            background-color: var(--blue);
+            color: var(--white);
             padding: 50px;
             border-radius: 8px;
             text-align: center;
@@ -219,10 +255,11 @@
             margin: 0 auto 30px;
         }
         
+        /* Стили для кнопки */
         .btn {
             display: inline-block;
-            background-color: var(--accent);
-            color: white;
+            background-color: var(--red);
+            color: var(--white);
             padding: 12px 30px;
             border-radius: 50px;
             text-decoration: none;
@@ -235,17 +272,25 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         
+        /* Подвал сайта */
         footer {
             background-color: var(--dark);
-            color: white;
+            color: var(--white);
             text-align: center;
             padding: 30px;
             margin-top: 50px;
         }
         
+        /* Адаптивность для разных экранов */
         @media (max-width: 1200px) {
+            /* На экранах меньше 1200px - 3 карточки в ряд */
             .leaders-grid {
-                grid-template-columns: repeat(2, 1fr); /* На экранах поменьше - 2 колонки */
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            /* Галерея - 2 колонки */
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
@@ -263,98 +308,133 @@
                 padding: 60px 15px;
             }
             
-            .leaders-grid {
-                grid-template-columns: 1fr; /* На мобильных - 1 колонка */
+            /* На мобильных - 1 колонка */
+            .leaders-grid, .gallery-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Шапка сайта с названием школы -->
     <header>
         <h1>МБОУ СОШ №25</h1>
         <p class="subtitle">Школа с богатой историей и традициями, где каждый ученик может раскрыть свой потенциал</p>
     </header>
     
+    <!-- Навигационное меню -->
     <nav>
         <div class="nav-container">
+            <!-- Ссылки на разделы сайта -->
             <a href="#leaders" class="nav-link">Руководители</a>
             <a href="#history" class="nav-link">История школы</a>
             <a href="#teachers" class="nav-link">Педагоги-выпускники</a>
             <a href="#olympiad" class="nav-link">Олимпиада РО</a>
+            <a href="#gallery" class="nav-link">Фотоархив</a> <!-- Новая ссылка -->
         </div>
     </nav>
     
+    <!-- Раздел "Руководители" -->
     <section id="leaders">
         <div class="section-title">
             <h2>Руководители школы</h2>
         </div>
         <div class="leaders-grid">
+            <!-- Карточка руководителя 1 -->
             <div class="card">
                 <div class="card-img">
+                    <!-- Фото можно заменить, изменив ссылку в src -->
                     <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Директор школы">
                 </div>
                 <div class="card-content">
                     <h3>Иванова Мария Петровна</h3>
-                    <p>Директор школы с 2010 года</p>
-                    <p>Кандидат педагогических наук, Заслуженный учитель РФ</p>
+                    <p>Директор школы</p>
+                    <p>С 2010 года</p>
                 </div>
             </div>
+            
+            <!-- Карточка руководителя 2 -->
             <div class="card">
                 <div class="card-img">
                     <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Завуч">
                 </div>
                 <div class="card-content">
                     <h3>Петров Сергей Иванович</h3>
-                    <p>Заместитель директора по учебной работе</p>
-                    <p>Учитель высшей категории, стаж работы 25 лет</p>
+                    <p>Заместитель директора</p>
+                    <p>Учебная работа</p>
                 </div>
             </div>
+            
+            <!-- Карточка руководителя 3 -->
             <div class="card">
                 <div class="card-img">
                     <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Завуч">
                 </div>
                 <div class="card-content">
                     <h3>Сидорова Елена Владимировна</h3>
-                    <p>Заместитель директора по воспитательной работе</p>
-                    <p>Победитель конкурса "Учитель года"</p>
+                    <p>Заместитель директора</p>
+                    <p>Воспитательная работа</p>
                 </div>
             </div>
+            
+            <!-- Карточка руководителя 4 -->
             <div class="card">
                 <div class="card-img">
                     <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Завуч">
                 </div>
                 <div class="card-content">
                     <h3>Кузнецов Андрей Михайлович</h3>
-                    <p>Заместитель директора по АХЧ</p>
-                    <p>Работает в школе с 1995 года</p>
+                    <p>Заместитель директора</p>
+                    <p>По АХЧ</p>
+                </div>
+            </div>
+            
+            <!-- Карточка руководителя 5 (новая) -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Завуч">
+                </div>
+                <div class="card-content">
+                    <h3>Васильева Ольга Дмитриевна</h3>
+                    <p>Заместитель директора</p>
+                    <p>По методической работе</p>
                 </div>
             </div>
         </div>
     </section>
     
+    <!-- Раздел "История школы" -->
     <section id="history">
         <div class="section-title">
             <h2>История школы глазами педагогов</h2>
         </div>
+        
+        <!-- Блок истории 1 -->
         <div class="history-item">
             <h3>Основание школы (1965 год)</h3>
             <p>"Я помню, как мы начинали в небольшом здании с печным отоплением. Не было ни современного оборудования, ни хорошей мебели, но был огромный энтузиазм и желание учить детей." - Смирнова А.П., учитель математики (стаж 45 лет)</p>
         </div>
+        
+        <!-- Блок истории 2 -->
         <div class="history-item">
             <h3>1980-е годы</h3>
             <p>"Это было время расцвета пионерской организации. Мы проводили замечательные слеты, конкурсы, соревнования между классами. Дети были очень активные и дружные." - Петрова И.С., учитель начальных классов (стаж 38 лет)</p>
         </div>
+        
+        <!-- Блок истории 3 -->
         <div class="history-item">
             <h3>2000-е годы</h3>
             <p>"С появлением компьютеров изменился сам подход к обучению. Мы осваивали новые технологии вместе с учениками. Помню, как радовались первому компьютерному классу!" - Козлов В.М., учитель информатики (стаж 30 лет)</p>
         </div>
     </section>
     
+    <!-- Раздел "Педагоги-выпускники" -->
     <section id="teachers">
         <div class="section-title">
             <h2>Педагоги-выпускники школы</h2>
         </div>
         <div class="teachers-grid">
+            <!-- Карточка учителя 1 -->
             <div class="card">
                 <div class="card-img">
                     <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Учитель">
@@ -365,6 +445,8 @@
                     <p>Учитель английского языка, работает в школе с 2012 года</p>
                 </div>
             </div>
+            
+            <!-- Карточка учителя 2 -->
             <div class="card">
                 <div class="card-img">
                     <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Учитель">
@@ -375,6 +457,8 @@
                     <p>Учитель физкультуры, работает в школе с 2004 года</p>
                 </div>
             </div>
+            
+            <!-- Карточка учителя 3 -->
             <div class="card">
                 <div class="card-img">
                     <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Учитель">
@@ -388,6 +472,125 @@
         </div>
     </section>
     
+    <!-- Новый раздел "Фотоархив" -->
+    <section id="gallery">
+        <div class="section-title">
+            <h2>Фотоархив школы</h2>
+        </div>
+        <div class="gallery-grid">
+            <!-- Фото 1 -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Школа в 1970-х">
+                </div>
+                <div class="card-content">
+                    <h3>1970-е годы</h3>
+                    <p>Первое здание школы</p>
+                </div>
+            </div>
+            
+            <!-- Фото 2 -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Выпуск 1985 года">
+                </div>
+                <div class="card-content">
+                    <h3>1985 год</h3>
+                    <p>Выпускной класс</p>
+                </div>
+            </div>
+            
+            <!-- Фото 3 -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Школьная команда КВН">
+                </div>
+                <div class="card-content">
+                    <h3>1990-е</h3>
+                    <p>Школьная команда КВН</p>
+                </div>
+            </div>
+            
+            <!-- Фото 4 -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Урок химии в 1990-х">
+                </div>
+                <div class="card-content">
+                    <h3>1995 год</h3>
+                    <p>Урок химии</p>
+                </div>
+            </div>
+            
+            <!-- Фото 5 -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Спортивные достижения">
+                </div>
+                <div class="card-content">
+                    <h3>2000 год</h3>
+                    <p>Спортивные соревнования</p>
+                </div>
+            </div>
+            
+            <!-- Фото 6 -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Современные классы">
+                </div>
+                <div class="card-content">
+                    <h3>2005 год</h3>
+                    <p>Новый компьютерный класс</p>
+                </div>
+            </div>
+            
+            <!-- Фото 7 -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Школьный праздник">
+                </div>
+                <div class="card-content">
+                    <h3>2010 год</h3>
+                    <p>Школьный концерт</p>
+                </div>
+            </div>
+            
+            <!-- Фото 8 -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Олимпиада">
+                </div>
+                <div class="card-content">
+                    <h3>2015 год</h3>
+                    <p>Школьная олимпиада</p>
+                </div>
+            </div>
+            
+            <!-- Фото 9 -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ремонт школы">
+                </div>
+                <div class="card-content">
+                    <h3>2018 год</h3>
+                    <p>Ремонт школы</p>
+                </div>
+            </div>
+            
+            <!-- Фото 10 -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Современная школа">
+                </div>
+                <div class="card-content">
+                    <h3>2020 год</h3>
+                    <p>Современный вид школы</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Раздел "Олимпиада" -->
     <section id="olympiad">
         <div class="olympiad">
             <h2>Олимпиада развивающего обучения</h2>
@@ -396,12 +599,16 @@
         </div>
     </section>
     
+    <!-- Подвал сайта -->
     <footer>
         <p>© 2023 МБОУ СОШ №25. Все права защищены.</p>
         <p>Контактный телефон: +7 (XXX) XXX-XX-XX</p>
+        <p>Адрес: г. Город, ул. Школьная, д. 25</p>
     </footer>
     
+    <!-- Скрипты для работы сайта -->
     <script>
+        // Плавная прокрутка при клике на ссылки меню
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -412,6 +619,7 @@
             });
         });
         
+        // Анимация появления карточек при прокрутке
         const animateCards = () => {
             const cards = document.querySelectorAll('.card, .history-item');
             const windowHeight = window.innerHeight;
@@ -427,12 +635,14 @@
             });
         };
         
+        // Изначально скрываем карточки (появятся при прокрутке)
         document.querySelectorAll('.card, .history-item').forEach(card => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(20px)';
             card.style.transition = 'all 0.6s ease';
         });
         
+        // Запускаем анимации при прокрутке и при загрузке
         window.addEventListener('scroll', animateCards);
         window.addEventListener('load', animateCards);
     </script>
