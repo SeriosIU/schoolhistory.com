@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>История нашей школы</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>МБОУ СОШ №25</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2980b9;
-            --accent-color: #e74c3c;
-            --dark-color: #2c3e50;
-            --light-color: #ecf0f1;
-            --transition: all 0.3s ease;
+            --primary: #2c5aa0;
+            --secondary: #4a90e2;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #343a40;
         }
         
         * {
@@ -23,801 +22,360 @@
         }
         
         body {
-            background-color: var(--light-color);
-            color: var(--dark-color);
+            background-color: var(--light);
+            color: var(--dark);
             line-height: 1.6;
-            overflow-x: hidden;
         }
         
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             text-align: center;
-            padding: 0 20px;
+            padding: 100px 20px 80px;
             position: relative;
-            overflow: hidden;
         }
         
-        header::before {
+        header::after {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: -50px;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-            opacity: 0.2;
-            z-index: 0;
+            height: 100px;
+            background-color: var(--light);
+            clip-path: polygon(0 0, 100% 70%, 100% 100%, 0% 100%);
         }
         
-        header * {
-            position: relative;
-            z-index: 1;
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
         }
         
-        .navbar {
-            position: fixed;
+        .subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
+            z-index: 100;
         }
         
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-link {
+            padding: 20px;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo i {
-            margin-right: 10px;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 30px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark-color);
+            color: var(--dark);
             font-weight: 500;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             position: relative;
         }
         
-        .nav-links a:hover {
-            color: var(--primary-color);
+        .nav-link:hover {
+            color: var(--primary);
         }
         
-        .nav-links a::after {
+        .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
+            bottom: 15px;
+            left: 20px;
             width: 0;
             height: 2px;
-            background-color: var(--primary-color);
-            transition: var(--transition);
+            background-color: var(--accent);
+            transition: all 0.3s ease;
         }
         
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        .hero {
-            max-width: 800px;
-            margin-top: 60px;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            animation: fadeInDown 1s ease;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            animation: fadeInUp 1s ease 0.3s both;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            animation: fadeIn 1s ease 0.6s both;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6);
+        .nav-link:hover::after {
+            width: calc(100% - 40px);
         }
         
         section {
-            padding: 100px 10%;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: var(--accent-color);
-        }
-        
-        .history-timeline {
-            position: relative;
+            padding: 80px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
         
-        .history-timeline::after {
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
             content: '';
             position: absolute;
-            width: 6px;
-            background-color: var(--primary-color);
-            top: 0;
             bottom: 0;
             left: 50%;
-            margin-left: -3px;
-            border-radius: 3px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
         }
         
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-            box-sizing: border-box;
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
-        
-        .timeline-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            right: -12px;
-            background-color: white;
-            border: 4px solid var(--accent-color);
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-        
-        .left {
-            left: 0;
-        }
-        
-        .right {
-            left: 50%;
-        }
-        
-        .right::after {
-            left: -12px;
-        }
-        
-        .timeline-content {
-            padding: 20px 30px;
-            background-color: white;
-            position: relative;
-            border-radius: 6px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .timeline-content h3 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        
-        .timeline-content p {
-            margin-bottom: 10px;
-        }
-        
-        .timeline-date {
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-        
-        .gallery {
-            background-color: #f1f2f6;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .gallery-item {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 250px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-        
-        .gallery-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(52, 152, 219, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: var(--transition);
-        }
-        
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-        
-        .gallery-overlay i {
-            color: white;
-            font-size: 2.5rem;
-        }
-        
-        .teachers {
+        .leaders-grid, .teachers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
         
-        .teacher-card {
+        .card {
             background-color: white;
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
         
-        .teacher-card:hover {
+        .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
         
-        .teacher-img {
-            height: 300px;
+        .card-img {
+            height: 250px;
             overflow: hidden;
         }
         
-        .teacher-img img {
+        .card-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition);
+            transition: all 0.5s ease;
         }
         
-        .teacher-card:hover .teacher-img img {
+        .card:hover .card-img img {
             transform: scale(1.1);
         }
         
-        .teacher-info {
+        .card-content {
             padding: 20px;
-            text-align: center;
         }
         
-        .teacher-info h3 {
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-        
-        .teacher-info p {
-            color: var(--accent-color);
-            font-weight: 500;
-            margin-bottom: 15px;
-        }
-        
-        .teacher-social {
-            display: flex;
-            justify-content: center;
-        }
-        
-        .teacher-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 35px;
-            height: 35px;
-            background-color: var(--light-color);
-            border-radius: 50%;
-            margin: 0 5px;
-            color: var(--dark-color);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .teacher-social a:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .achievements {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-        }
-        
-        .achievements .section-title h2 {
-            color: white;
-        }
-        
-        .achievements .section-title::after {
-            background-color: white;
-        }
-        
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            text-align: center;
-        }
-        
-        .achievement-item {
-            padding: 30px 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            transition: var(--transition);
-        }
-        
-        .achievement-item:hover {
-            transform: translateY(-10px);
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .achievement-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--accent-color);
-        }
-        
-        .achievement-item h3 {
-            font-size: 2.5rem;
+        .card-content h3 {
+            color: var(--primary);
             margin-bottom: 10px;
         }
         
-        .contact {
+        .card-content p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .history-item {
             background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #f9f9f9;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        .history-item h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
         }
         
-        .form-group {
+        .olympiad {
+            background-color: var(--primary);
+            color: white;
+            padding: 50px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .olympiad h2 {
             margin-bottom: 20px;
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
+        .olympiad p {
+            max-width: 800px;
+            margin: 0 auto 30px;
         }
         
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: var(--transition);
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
         
-        .form-control:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         
         footer {
-            background-color: var(--dark-color);
+            background-color: var(--dark);
             color: white;
             text-align: center;
-            padding: 30px 0;
+            padding: 30px;
+            margin-top: 50px;
         }
         
-        .social-links {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            margin: 0 10px;
-            color: white;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .social-links a:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-3px);
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Адаптивность */
         @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 5%;
+            h1 {
+                font-size: 2rem;
             }
             
-            .nav-links {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
+            .nav-link {
+                padding: 15px 10px;
+                font-size: 0.9rem;
             }
             
             section {
-                padding: 80px 5%;
-            }
-            
-            .history-timeline::after {
-                left: 31px;
-            }
-            
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            
-            .timeline-item::after {
-                left: 18px;
-            }
-            
-            .left::after, .right::after {
-                left: 18px;
-            }
-            
-            .right {
-                left: 0%;
+                padding: 60px 15px;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="#" class="logo"><i class="fas fa-school"></i>Школа №175</a>
-        <ul class="nav-links">
-            <li><a href="#history">История</a></li>
-            <li><a href="#gallery">Фотоархив</a></li>
-            <li><a href="#teachers">Учителя</a></li>
-            <li><a href="#achievements">Достижения</a></li>
-            <li><a href="#contact">Контакты</a></li>
-        </ul>
-    </nav>
-
     <header>
-        <div class="hero">
-            <h1>История нашей школы</h1>
-            <p>МБОУ СОШ №25 - это почти 30 лет традиций, знаний и успехов. Узнайте о нашем пути от основания до сегодняшних дней.</p>
-            <a href="#history" class="btn">Узнать историю</a>
-        </div>
+        <h1>МБОУ СОШ №25</h1>
+        <p class="subtitle">Школа с богатой историей и традициями, где каждый ученик может раскрыть свой потенциал</p>
     </header>
-
+    
+    <nav>
+        <div class="nav-container">
+            <a href="#leaders" class="nav-link">Руководители</a>
+            <a href="#history" class="nav-link">История школы</a>
+            <a href="#teachers" class="nav-link">Педагоги-выпускники</a>
+            <a href="#olympiad" class="nav-link">Олимпиада РО</a>
+        </div>
+    </nav>
+    
+    <section id="leaders">
+        <div class="section-title">
+            <h2>Руководители школы</h2>
+        </div>
+        <div class="leaders-grid">
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Директор школы">
+                </div>
+                <div class="card-content">
+                    <h3>Иванова Мария Петровна</h3>
+                    <p>Директор школы с 2010 года</p>
+                    <p>Кандидат педагогических наук, Заслуженный учитель РФ</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Завуч">
+                </div>
+                <div class="card-content">
+                    <h3>Петров Сергей Иванович</h3>
+                    <p>Заместитель директора по учебной работе</p>
+                    <p>Учитель высшей категории, стаж работы 25 лет</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Завуч">
+                </div>
+                <div class="card-content">
+                    <h3>Сидорова Елена Владимировна</h3>
+                    <p>Заместитель директора по воспитательной работе</p>
+                    <p>Победитель конкурса "Учитель года"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <section id="history">
         <div class="section-title">
-            <h2>Историческая хроника</h2>
+            <h2>История школы глазами педагогов</h2>
         </div>
-        <div class="history-timeline">
-            <div class="timeline-item left">
-                <div class="timeline-content">
-                    <div class="timeline-date">1986 год</div>
-                    <h3>Основание школы</h3>
-                    <p>Школа №25 была открыта в западном районе города. Первый директор - Кливер Валентина Ивановна.</p>
-                </div>
-            </div>
-            <div class="timeline-item right">
-                <div class="timeline-content">
-                    <div class="timeline-date">1978 год</div>
-                    <h3>Первые медалисты</h3>
-                    <p>Трое выпускников школы получили золотые медали, а пятеро - серебряные. Это стало началом традиции отличной учебы.</p>
-                </div>
-            </div>
-            <div class="timeline-item left">
-                <div class="timeline-content">
-                    <div class="timeline-date">1985 год</div>
-                    <h3>Новый корпус</h3>
-                    <p>Был построен дополнительный корпус с современными (на тот момент) лабораториями и спортивным залом.</p>
-                </div>
-            </div>
-            <div class="timeline-item right">
-                <div class="timeline-content">
-                    <div class="timeline-date">1999 год</div>
-                    <h3>Компьютерный класс</h3>
-                    <p>Школа одной из первых в городе получила компьютерный класс с 15 современными компьютерами.</p>
-                </div>
-            </div>
-            <div class="timeline-item left">
-                <div class="timeline-content">
-                    <div class="timeline-date">2010 год</div>
-                    <h3>Победа в олимпиаде</h3>
-                    <p>Ученик 11 класса стал победителем Всероссийской олимпиады по физике, принеся школе первую столь значительную награду.</p>
-                </div>
-            </div>
-            <div class="timeline-item right">
-                <div class="timeline-content">
-                    <div class="timeline-date">2020 год</div>
-                    <h3>Современные технологии</h3>
-                    <p>Полностью обновлена материально-техническая база, все кабинеты оснащены интерактивными досками и проекторами.</p>
-                </div>
-            </div>
+        <div class="history-item">
+            <h3>Основание школы (1965 год)</h3>
+            <p>"Я помню, как мы начинали в небольшом здании с печным отоплением. Не было ни современного оборудования, ни хорошей мебели, но был огромный энтузиазм и желание учить детей." - Смирнова А.П., учитель математики (стаж 45 лет)</p>
+        </div>
+        <div class="history-item">
+            <h3>1980-е годы</h3>
+            <p>"Это было время расцвета пионерской организации. Мы проводили замечательные слеты, конкурсы, соревнования между классами. Дети были очень активные и дружные." - Петрова И.С., учитель начальных классов (стаж 38 лет)</p>
+        </div>
+        <div class="history-item">
+            <h3>2000-е годы</h3>
+            <p>"С появлением компьютеров изменился сам подход к обучению. Мы осваивали новые технологии вместе с учениками. Помню, как радовались первому компьютерному классу!" - Козлов В.М., учитель информатики (стаж 30 лет)</p>
         </div>
     </section>
-
-    <section id="gallery" class="gallery">
-        <div class="section-title">
-            <h2>Фотоархив</h2>
-        </div>
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Школа в 1970-х">
-                <div class="gallery-overlay">
-                    <i class="fas fa-search-plus"></i>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Выпуск 1985 года">
-                <div class="gallery-overlay">
-                    <i class="fas fa-search-plus"></i>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Школьная команда КВН">
-                <div class="gallery-overlay">
-                    <i class="fas fa-search-plus"></i>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Урок химии в 1990-х">
-                <div class="gallery-overlay">
-                    <i class="fas fa-search-plus"></i>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Спортивные достижения">
-                <div class="gallery-overlay">
-                    <i class="fas fa-search-plus"></i>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Современные классы">
-                <div class="gallery-overlay">
-                    <i class="fas fa-search-plus"></i>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
     <section id="teachers">
         <div class="section-title">
-            <h2>Легендарные учителя</h2>
+            <h2>Педагоги-выпускники школы</h2>
         </div>
-        <div class="teachers">
-            <div class="teacher-card">
-                <div class="teacher-img">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Смирнова А.П.">
+        <div class="teachers-grid">
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Учитель">
                 </div>
-                <div class="teacher-info">
-                    <h3>Смирнова Анна Петровна</h3>
-                    <p>Учитель математики (1965-2001)</p>
-                    <div class="teacher-social">
-                        <a href="#"><i class="fas fa-envelope"></i></a>
-                        <a href="#"><i class="fab fa-vk"></i></a>
-                    </div>
+                <div class="card-content">
+                    <h3>Александрова Ольга Сергеевна</h3>
+                    <p>Выпуск 2005 года</p>
+                    <p>Учитель английского языка, работает в школе с 2012 года</p>
                 </div>
             </div>
-            <div class="teacher-card">
-                <div class="teacher-img">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Иванов В.С.">
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Учитель">
                 </div>
-                <div class="teacher-info">
-                    <h3>Иванов Владимир Сергеевич</h3>
-                    <p>Учитель физики (1972-2010)</p>
-                    <div class="teacher-social">
-                        <a href="#"><i class="fas fa-envelope"></i></a>
-                        <a href="#"><i class="fab fa-vk"></i></a>
-                    </div>
+                <div class="card-content">
+                    <h3>Николаев Дмитрий Иванович</h3>
+                    <p>Выпуск 1998 года</p>
+                    <p>Учитель физкультуры, работает в школе с 2004 года</p>
                 </div>
             </div>
-            <div class="teacher-card">
-                <div class="teacher-img">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Петрова Е.И.">
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Учитель">
                 </div>
-                <div class="teacher-info">
-                    <h3>Петрова Елена Ивановна</h3>
-                    <p>Учитель литературы (1980-2015)</p>
-                    <div class="teacher-social">
-                        <a href="#"><i class="fas fa-envelope"></i></a>
-                        <a href="#"><i class="fab fa-vk"></i></a>
-                    </div>
+                <div class="card-content">
+                    <h3>Кузнецова Анна Михайловна</h3>
+                    <p>Выпуск 2010 года</p>
+                    <p>Учитель начальных классов, работает в школе с 2016 года</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <section id="achievements" class="achievements">
-        <div class="section-title">
-            <h2>Наши достижения</h2>
-        </div>
-        <div class="achievements-grid">
-            <div class="achievement-item">
-                <div class="achievement-icon">
-                    <i class="fas fa-medal"></i>
-                </div>
-                <h3>42</h3>
-                <p>Золотых медалиста</p>
-            </div>
-            <div class="achievement-item">
-                <div class="achievement-icon">
-                    <i class="fas fa-trophy"></i>
-                </div>
-                <h3>15</h3>
-                <p>Победителей всероссийских олимпиад</p>
-            </div>
-            <div class="achievement-item">
-                <div class="achievement-icon">
-                    <i class="fas fa-user-graduate"></i>
-                </div>
-                <h3>5000+</h3>
-                <p>Выпускников</p>
-            </div>
-            <div class="achievement-item">
-                <div class="achievement-icon">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                </div>
-                <h3>35</h3>
-                <p>Педагогов высшей категории</p>
-            </div>
+    
+    <section id="olympiad">
+        <div class="olympiad">
+            <h2>Олимпиада развивающего обучения</h2>
+            <p>Ежегодная олимпиада для учащихся начальных классов, направленная на развитие творческого мышления, логики и нестандартного подхода к решению задач. Проводится с 2005 года.</p>
+            <a href="#" class="btn">Узнать подробнее</a>
         </div>
     </section>
-
-    <section id="contact" class="contact">
-        <div class="section-title">
-            <h2>Свяжитесь с нами</h2>
-        </div>
-        <div class="contact-form">
-            <form>
-                <div class="form-group">
-                    <label for="name">Ваше имя</label>
-                    <input type="text" id="name" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Сообщение</label>
-                    <textarea id="message" class="form-control" required></textarea>
-                </div>
-                <button type="submit" class="btn">Отправить</button>
-            </form>
-        </div>
-    </section>
-
+    
     <footer>
-        <div class="social-links">
-            <a href="#"><i class="fab fa-vk"></i></a>
-            <a href="#"><i class="fab fa-telegram-plane"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-        </div>
-        <p>&copy; 2025 Школа №25. Все права защищены.</p>
+        <p>© 2023 МБОУ СОШ №25. Все права защищены.</p>
+        <p>Контактный телефон: +7 (XXX) XXX-XX-XX</p>
     </footer>
-
+    
     <script>
-        // Плавная прокрутка для якорных ссылок
+        // Плавная прокрутка
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
@@ -826,50 +384,31 @@
             });
         });
         
-        // Анимация временной шкалы при скролле
-        const animateTimeline = () => {
-            const timelineItems = document.querySelectorAll('.timeline-item');
+        // Анимация карточек при скролле
+        const animateCards = () => {
+            const cards = document.querySelectorAll('.card, .history-item');
+            const windowHeight = window.innerHeight;
             
-            timelineItems.forEach(item => {
-                const itemPosition = item.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
+            cards.forEach(card => {
+                const cardPosition = card.getBoundingClientRect().top;
+                const animationPoint = windowHeight - 100;
                 
-                if (itemPosition < screenPosition) {
-                    item.classList.add('visible');
+                if(cardPosition < animationPoint) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
                 }
             });
         };
         
-        // Анимация галереи и других элементов
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.gallery-item, .teacher-card, .achievement-item, .contact-form');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if (elementPosition < screenPosition) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }
-            });
-        };
-        
-        // Изначально скрываем элементы
-        document.querySelectorAll('.gallery-item, .teacher-card, .achievement-item, .contact-form').forEach(element => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'all 0.6s ease';
+        // Изначально скрываем карточки
+        document.querySelectorAll('.card, .history-item').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
         });
         
-        window.addEventListener('scroll', () => {
-            animateTimeline();
-            animateOnScroll();
-        });
-        window.addEventListener('load', () => {
-            animateTimeline();
-            animateOnScroll();
-        });
+        window.addEventListener('scroll', animateCards);
+        window.addEventListener('load', animateCards);
     </script>
 </body>
 </html>
