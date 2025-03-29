@@ -1,21 +1,17 @@
 .leaders-grid {
-    display: flex; /* Вместо grid */
+    display: flex;
+    flex-wrap: wrap; /* Перенос на новую строку при нехватке места */
     gap: 20px;
-    overflow-x: auto; /* Горизонтальный скролл при необходимости */
-    padding-bottom: 20px; /* Для скроллбара */
-    scrollbar-width: thin; /* Стилизация скроллбара */
-    scrollbar-color: var(--primary) var(--light);
+    justify-content: center; /* Центрирование карточек */
 }
 .leaders-grid .card {
-    flex: 0 0 auto; /* Не сжимать и не растягивать */
-    width: 250px; /* Фиксированная ширина */
+    flex: 1; /* Карточки могут растягиваться */
+    min-width: 200px; /* Минимальная ширина */
+    max-width: 250px; /* Максимальная ширина */
 }
 @media (max-width: 768px) {
-    .leaders-grid {
-        -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
-    }
-    
     .leaders-grid .card {
-        width: 220px; /* Немного уменьшаем ширину */
+        min-width: 150px;
+        max-width: 100%; /* На узких экранах карточки занимают всю ширину */
     }
 }
