@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>МБОУ СОШ №25 - Руководство</title>
+    <title>МБОУ СОШ №25</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -131,11 +131,16 @@
             background-color: var(--accent);
         }
         
-        /* Стили для 5 руководителей в строку */
         .leaders-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .teachers-grid, .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
         
         .card {
@@ -153,7 +158,7 @@
         }
         
         .card-img {
-            height: 180px;
+            height: 200px;
             overflow: hidden;
         }
         
@@ -170,19 +175,62 @@
         
         .card-content {
             padding: 15px;
-            text-align: center;
         }
         
         .card-content h3 {
             color: var(--primary);
             margin-bottom: 8px;
-            font-size: 1rem;
         }
         
         .card-content p {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #666;
-            font-size: 0.85rem;
+        }
+        
+        .history-item {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .history-item h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .olympiad {
+            background-color: var(--primary);
+            color: white;
+            padding: 50px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .olympiad h2 {
+            margin-bottom: 20px;
+        }
+        
+        .olympiad p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         
         /* Стили для страницы руководителя */
@@ -271,13 +319,6 @@
             margin-top: 50px;
         }
         
-        /* Адаптивность */
-        @media (max-width: 1200px) {
-            .leaders-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -290,10 +331,6 @@
             
             section {
                 padding: 60px 15px;
-            }
-            
-            .leaders-grid {
-                grid-template-columns: 1fr;
             }
             
             .leader-header {
@@ -331,7 +368,7 @@
                 <h2>Руководители школы</h2>
             </div>
             <div class="leaders-grid">
-                <!-- Руководитель 1 -->
+                <!-- Карточки руководителей с data-id -->
                 <div class="card leader-card" data-id="1">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Директор школы">
@@ -343,7 +380,6 @@
                     </div>
                 </div>
                 
-                <!-- Руководитель 2 -->
                 <div class="card leader-card" data-id="2">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Завуч">
@@ -355,7 +391,6 @@
                     </div>
                 </div>
                 
-                <!-- Руководитель 3 -->
                 <div class="card leader-card" data-id="3">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Завуч">
@@ -367,7 +402,6 @@
                     </div>
                 </div>
                 
-                <!-- Руководитель 4 -->
                 <div class="card leader-card" data-id="4">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Завуч">
@@ -379,7 +413,6 @@
                     </div>
                 </div>
                 
-                <!-- Руководитель 5 -->
                 <div class="card leader-card" data-id="5">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Завуч">
@@ -393,7 +426,131 @@
             </div>
         </section>
         
-        <!-- Остальные разделы... -->
+        <section id="history">
+            <div class="section-title">
+                <h2>История школы глазами педагогов</h2>
+            </div>
+            <div class="history-item">
+                <h3>Основание школы (1965 год)</h3>
+                <p>"Я помню, как мы начинали в небольшом здании с печным отоплением. Не было ни современного оборудования, ни хорошей мебели, но был огромный энтузиазм и желание учить детей." - Смирнова А.П., учитель математики (стаж 45 лет)</p>
+            </div>
+            <div class="history-item">
+                <h3>1980-е годы</h3>
+                <p>"Это было время расцвета пионерской организации. Мы проводили замечательные слеты, конкурсы, соревнования между классами. Дети были очень активные и дружные." - Петрова И.С., учитель начальных классов (стаж 38 лет)</p>
+            </div>
+            <div class="history-item">
+                <h3>2000-е годы</h3>
+                <p>"С появлением компьютеров изменился сам подход к обучению. Мы осваивали новые технологии вместе с учениками. Помню, как радовались первому компьютерному классу!" - Козлов В.М., учитель информатики (стаж 30 лет)</p>
+            </div>
+        </section>
+        
+        <section id="teachers">
+            <div class="section-title">
+                <h2>Педагоги-выпускники школы</h2>
+            </div>
+            <div class="teachers-grid">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Учитель">
+                    </div>
+                    <div class="card-content">
+                        <h3>Александрова Ольга Сергеевна</h3>
+                        <p>Выпуск 2005 года</p>
+                        <p>Учитель английского языка, работает в школе с 2012 года</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Учитель">
+                    </div>
+                    <div class="card-content">
+                        <h3>Николаев Дмитрий Иванович</h3>
+                        <p>Выпуск 1998 года</p>
+                        <p>Учитель физкультуры, работает в школе с 2004 года</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Учитель">
+                    </div>
+                    <div class="card-content">
+                        <h3>Кузнецова Анна Михайловна</h3>
+                        <p>Выпуск 2010 года</p>
+                        <p>Учитель начальных классов, работает в школе с 2016 года</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="gallery">
+            <div class="section-title">
+                <h2>Фотоархив школы</h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Школа в 1970-х">
+                    </div>
+                    <div class="card-content">
+                        <h3>1970-е годы</h3>
+                        <p>Первое здание школы</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Выпуск 1985 года">
+                    </div>
+                    <div class="card-content">
+                        <h3>1985 год</h3>
+                        <p>Выпускной класс</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Школьная команда КВН">
+                    </div>
+                    <div class="card-content">
+                        <h3>1990-е</h3>
+                        <p>Школьная команда КВН</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Урок химии в 1990-х">
+                    </div>
+                    <div class="card-content">
+                        <h3>1995 год</h3>
+                        <p>Урок химии</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Спортивные достижения">
+                    </div>
+                    <div class="card-content">
+                        <h3>2000 год</h3>
+                        <p>Спортивные соревнования</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Современные классы">
+                    </div>
+                    <div class="card-content">
+                        <h3>2005 год</h3>
+                        <p>Новый компьютерный класс</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="olympiad">
+            <div class="olympiad">
+                <h2>Олимпиада развивающего обучения</h2>
+                <p>Ежегодная олимпиада для учащихся начальных классов, направленная на развитие творческого мышления, логики и нестандартного подхода к решению задач. Проводится с 2005 года.</p>
+                <a href="#" class="btn">Узнать подробнее</a>
+            </div>
+        </section>
         
         <footer>
             <p>© 2023 МБОУ СОШ №25. Все права защищены.</p>
@@ -427,6 +584,9 @@
                 
                 <h3>Достижения</h3>
                 <p>Под руководством Марии Петровны школа трижды становилась лауреатом конкурса "Лучшая школа года". В 2015 году получила звание Заслуженного учителя Российской Федерации.</p>
+                
+                <h3>Публикации</h3>
+                <p>Автор более 20 научных публикаций по методике преподавания математики и управлению образовательными учреждениями.</p>
             </div>
         </div>
         
@@ -539,6 +699,37 @@
     </div>
 
     <script>
+        // Данные о руководителях (можно вынести в отдельный файл)
+        const leadersData = {
+            1: {
+                name: "Иванова Мария Петровна",
+                position: "Директор школы",
+                photo: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+                years: "с 2010 года по настоящее время",
+                education: "Высшее педагогическое, кандидат наук",
+                awards: "Заслуженный учитель РФ",
+                bio: [
+                    {
+                        title: "Биография",
+                        content: "Иванова Мария Петровна родилась 15 марта 1968 года в городе Москве. Окончила Московский педагогический государственный университет в 1990 году по специальности 'Математика'."
+                    },
+                    {
+                        title: "Профессиональная деятельность",
+                        content: "Начала свою педагогическую деятельность в 1990 году учителем математики в школе №15. С 1995 года занимала должность заместителя директора по учебной работе. В 2010 году была назначена директором школы №25."
+                    },
+                    {
+                        title: "Достижения",
+                        content: "Под руководством Марии Петровны школа трижды становилась лауреатом конкурса 'Лучшая школа года'. В 2015 году получила звание Заслуженного учителя Российской Федерации."
+                    },
+                    {
+                        title: "Публикации",
+                        content: "Автор более 20 научных публикаций по методике преподавания математики и управлению образовательными учреждениями."
+                    }
+                ]
+            },
+            // Аналогично для других руководителей...
+        };
+
         // Обработка кликов на карточки руководителей
         document.querySelectorAll('.leader-card').forEach(card => {
             card.addEventListener('click', function() {
@@ -576,7 +767,7 @@
 
         // Плавная прокрутка при клике на ссылки меню
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            if (!anchor.classList.contains('back-btn')) {
+            if (!anchor.classList.contains('back-btn') && !anchor.classList.contains('leader-card')) {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
                     
