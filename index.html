@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Элегантный Сайт</title>
+    <title>История нашей школы</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary-color: #6c5ce7;
-            --secondary-color: #a29bfe;
-            --accent-color: #fd79a8;
-            --dark-color: #2d3436;
-            --light-color: #f5f6fa;
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
             --transition: all 0.3s ease;
         }
         
@@ -50,7 +50,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            background: url('https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
             opacity: 0.2;
             z-index: 0;
         }
@@ -79,6 +79,12 @@
             font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
         }
         
         .nav-links {
@@ -144,12 +150,12 @@
             font-weight: 600;
             transition: var(--transition);
             animation: fadeIn 1s ease 0.6s both;
-            box-shadow: 0 4px 15px rgba(253, 121, 168, 0.4);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
         }
         
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(253, 121, 168, 0.6);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6);
         }
         
         section {
@@ -179,48 +185,98 @@
             background-color: var(--accent-color);
         }
         
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        .history-timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
-        .feature-card {
+        .history-timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
             background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-            text-align: center;
+            border: 4px solid var(--accent-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
         }
         
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        .left {
+            left: 0;
         }
         
-        .feature-icon {
-            font-size: 3rem;
+        .right {
+            left: 50%;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-content h3 {
             color: var(--primary-color);
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+        .timeline-content p {
+            margin-bottom: 10px;
         }
         
-        .portfolio {
+        .timeline-date {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .gallery {
             background-color: #f1f2f6;
         }
         
-        .portfolio-grid {
+        .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
         
-        .portfolio-item {
+        .gallery-item {
             position: relative;
             border-radius: 10px;
             overflow: hidden;
@@ -228,108 +284,156 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .portfolio-item img {
+        .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: var(--transition);
         }
         
-        .portfolio-item:hover img {
+        .gallery-item:hover img {
             transform: scale(1.1);
         }
         
-        .portfolio-overlay {
+        .gallery-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to top, rgba(108, 92, 231, 0.9), transparent);
+            background: rgba(52, 152, 219, 0.8);
             display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 20px;
+            justify-content: center;
+            align-items: center;
             opacity: 0;
             transition: var(--transition);
         }
         
-        .portfolio-item:hover .portfolio-overlay {
+        .gallery-item:hover .gallery-overlay {
             opacity: 1;
         }
         
-        .portfolio-overlay h3 {
+        .gallery-overlay i {
             color: white;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            transform: translateY(20px);
+            font-size: 2.5rem;
+        }
+        
+        .teachers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .teacher-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: var(--transition);
         }
         
-        .portfolio-overlay p {
-            color: rgba(255, 255, 255, 0.8);
-            transform: translateY(20px);
+        .teacher-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .teacher-img {
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .teacher-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             transition: var(--transition);
         }
         
-        .portfolio-item:hover .portfolio-overlay h3,
-        .portfolio-item:hover .portfolio-overlay p {
-            transform: translateY(0);
+        .teacher-card:hover .teacher-img img {
+            transform: scale(1.1);
         }
         
-        .testimonials {
+        .teacher-info {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .teacher-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .teacher-info p {
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .teacher-social {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .teacher-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: var(--light-color);
+            border-radius: 50%;
+            margin: 0 5px;
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .teacher-social a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .achievements {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
         }
         
-        .testimonials .section-title h2 {
+        .achievements .section-title h2 {
             color: white;
         }
         
-        .testimonials .section-title::after {
+        .achievements .section-title::after {
             background-color: white;
         }
         
-        .testimonial-slider {
-            max-width: 800px;
-            margin: 0 auto;
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
             text-align: center;
         }
         
-        .testimonial-slide {
-            padding: 0 20px;
+        .achievement-item {
+            padding: 30px 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: var(--transition);
         }
         
-        .testimonial-slide p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            font-style: italic;
+        .achievement-item:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.2);
         }
         
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .achievement-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
         }
         
-        .testimonial-author img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 15px;
-            border: 3px solid white;
-        }
-        
-        .author-info h4 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-        
-        .author-info p {
-            font-size: 0.9rem;
-            margin: 0;
-            opacity: 0.8;
+        .achievement-item h3 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
         }
         
         .contact {
@@ -367,7 +471,7 @@
         .form-control:focus {
             border-color: var(--primary-color);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
         }
         
         textarea.form-control {
@@ -456,104 +560,223 @@
                 padding: 80px 5%;
             }
             
-            .portfolio-grid {
-                grid-template-columns: 1fr;
+            .history-timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .left::after, .right::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0%;
             }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <a href="#" class="logo">Elegant</a>
+        <a href="#" class="logo"><i class="fas fa-school"></i>Школа №175</a>
         <ul class="nav-links">
-            <li><a href="#home">Главная</a></li>
-            <li><a href="#features">Возможности</a></li>
-            <li><a href="#portfolio">Портфолио</a></li>
-            <li><a href="#testimonials">Отзывы</a></li>
+            <li><a href="#history">История</a></li>
+            <li><a href="#gallery">Фотоархив</a></li>
+            <li><a href="#teachers">Учителя</a></li>
+            <li><a href="#achievements">Достижения</a></li>
             <li><a href="#contact">Контакты</a></li>
         </ul>
     </nav>
 
-    <header id="home">
+    <header>
         <div class="hero">
-            <h1>Создаем красивые цифровые решения</h1>
-            <p>Мы помогаем бизнесу расти с помощью современных технологий и креативного подхода</p>
-            <a href="#contact" class="btn">Начать проект</a>
+            <h1>История нашей школы</h1>
+            <p>Школа №175 - это более 50 лет традиций, знаний и успехов. Узнайте о нашем пути от основания до сегодняшних дней.</p>
+            <a href="#history" class="btn">Узнать историю</a>
         </div>
     </header>
 
-    <section id="features">
+    <section id="history">
         <div class="section-title">
-            <h2>Наши преимущества</h2>
+            <h2>Историческая хроника</h2>
         </div>
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-lightbulb"></i>
-                </div>
-                <h3>Креативный подход</h3>
-                <p>Уникальные решения, которые выделят вас среди конкурентов и привлекут внимание клиентов.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
-                <h3>Адаптивный дизайн</h3>
-                <p>Сайты, которые идеально выглядят на любом устройстве - от смартфона до широкоэкранного монитора.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-rocket"></i>
-                </div>
-                <h3>Быстрая работа</h3>
-                <p>Оптимизированный код и современные технологии обеспечивают мгновенную загрузку страниц.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="portfolio" class="portfolio">
-        <div class="section-title">
-            <h2>Наши работы</h2>
-        </div>
-        <div class="portfolio-grid">
-            <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Проект 1">
-                <div class="portfolio-overlay">
-                    <h3>Корпоративный сайт</h3>
-                    <p>Веб-дизайн, Разработка</p>
+        <div class="history-timeline">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">1965 год</div>
+                    <h3>Основание школы</h3>
+                    <p>Школа №175 была открыта в новом микрорайоне города. Первый директор - Иванова Мария Петровна.</p>
                 </div>
             </div>
-            <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Проект 2">
-                <div class="portfolio-overlay">
-                    <h3>Интернет-магазин</h3>
-                    <p>UI/UX дизайн, E-commerce</p>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">1978 год</div>
+                    <h3>Первые медалисты</h3>
+                    <p>Трое выпускников школы получили золотые медали, а пятеро - серебряные. Это стало началом традиции отличной учебы.</p>
                 </div>
             </div>
-            <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Проект 3">
-                <div class="portfolio-overlay">
-                    <h3>Блог платформа</h3>
-                    <p>Веб-разработка, Контент</p>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">1985 год</div>
+                    <h3>Новый корпус</h3>
+                    <p>Был построен дополнительный корпус с современными (на тот момент) лабораториями и спортивным залом.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">1999 год</div>
+                    <h3>Компьютерный класс</h3>
+                    <p>Школа одной из первых в городе получила компьютерный класс с 15 современными компьютерами.</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">2010 год</div>
+                    <h3>Победа в олимпиаде</h3>
+                    <p>Ученик 11 класса стал победителем Всероссийской олимпиады по физике, принеся школе первую столь значительную награду.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">2020 год</div>
+                    <h3>Современные технологии</h3>
+                    <p>Полностью обновлена материально-техническая база, все кабинеты оснащены интерактивными досками и проекторами.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="testimonials" class="testimonials">
+    <section id="gallery" class="gallery">
         <div class="section-title">
-            <h2>Что говорят клиенты</h2>
+            <h2>Фотоархив</h2>
         </div>
-        <div class="testimonial-slider">
-            <div class="testimonial-slide">
-                <p>"Команда проделала потрясающую работу! Наш сайт теперь не только красивый, но и приносит в 3 раза больше лидов, чем раньше. Очень рекомендую этих профессионалов!"</p>
-                <div class="testimonial-author">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Анна Смирнова">
-                    <div class="author-info">
-                        <h4>Анна Смирнова</h4>
-                        <p>Директор, ООО "ТехноЛидер"</p>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Школа в 1970-х">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Выпуск 1985 года">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Школьная команда КВН">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Урок химии в 1990-х">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Спортивные достижения">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Современные классы">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="teachers">
+        <div class="section-title">
+            <h2>Легендарные учителя</h2>
+        </div>
+        <div class="teachers">
+            <div class="teacher-card">
+                <div class="teacher-img">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Смирнова А.П.">
+                </div>
+                <div class="teacher-info">
+                    <h3>Смирнова Анна Петровна</h3>
+                    <p>Учитель математики (1965-2001)</p>
+                    <div class="teacher-social">
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-vk"></i></a>
                     </div>
                 </div>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-img">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Иванов В.С.">
+                </div>
+                <div class="teacher-info">
+                    <h3>Иванов Владимир Сергеевич</h3>
+                    <p>Учитель физики (1972-2010)</p>
+                    <div class="teacher-social">
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-img">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Петрова Е.И.">
+                </div>
+                <div class="teacher-info">
+                    <h3>Петрова Елена Ивановна</h3>
+                    <p>Учитель литературы (1980-2015)</p>
+                    <div class="teacher-social">
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements" class="achievements">
+        <div class="section-title">
+            <h2>Наши достижения</h2>
+        </div>
+        <div class="achievements-grid">
+            <div class="achievement-item">
+                <div class="achievement-icon">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <h3>42</h3>
+                <p>Золотых медалиста</p>
+            </div>
+            <div class="achievement-item">
+                <div class="achievement-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3>15</h3>
+                <p>Победителей всероссийских олимпиад</p>
+            </div>
+            <div class="achievement-item">
+                <div class="achievement-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3>5000+</h3>
+                <p>Выпускников</p>
+            </div>
+            <div class="achievement-item">
+                <div class="achievement-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3>35</h3>
+                <p>Педагогов высшей категории</p>
             </div>
         </div>
     </section>
@@ -583,12 +806,12 @@
 
     <footer>
         <div class="social-links">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-vk"></i></a>
+            <a href="#"><i class="fab fa-telegram-plane"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
         </div>
-        <p>&copy; 2023 Elegant. Все права защищены.</p>
+        <p>&copy; 2023 Школа №175. Все права защищены.</p>
     </footer>
 
     <script>
@@ -603,9 +826,23 @@
             });
         });
         
-        // Анимация при скролле
+        // Анимация временной шкалы при скролле
+        const animateTimeline = () => {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            timelineItems.forEach(item => {
+                const itemPosition = item.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (itemPosition < screenPosition) {
+                    item.classList.add('visible');
+                }
+            });
+        };
+        
+        // Анимация галереи и других элементов
         const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.feature-card, .portfolio-item, .testimonial-slide, .contact-form');
+            const elements = document.querySelectorAll('.gallery-item, .teacher-card, .achievement-item, .contact-form');
             
             elements.forEach(element => {
                 const elementPosition = element.getBoundingClientRect().top;
@@ -619,14 +856,20 @@
         };
         
         // Изначально скрываем элементы
-        document.querySelectorAll('.feature-card, .portfolio-item, .testimonial-slide, .contact-form').forEach(element => {
+        document.querySelectorAll('.gallery-item, .teacher-card, .achievement-item, .contact-form').forEach(element => {
             element.style.opacity = '0';
             element.style.transform = 'translateY(20px)';
             element.style.transition = 'all 0.6s ease';
         });
         
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', () => {
+            animateTimeline();
+            animateOnScroll();
+        });
+        window.addEventListener('load', () => {
+            animateTimeline();
+            animateOnScroll();
+        });
     </script>
 </body>
 </html>
