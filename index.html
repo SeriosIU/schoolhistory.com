@@ -14,6 +14,18 @@
             --light: #f8f9fa;
             --dark: #343a40;
         }
+        .header-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .school-icon {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
         
         * {
             margin: 0;
@@ -132,7 +144,6 @@
             background-color: var(--accent);
         }
         
-        /* Изменённый стиль для отображения руководителей в одну строку без прокрутки */
         .leaders-grid {
             display: flex;
             flex-wrap: wrap;
@@ -242,7 +253,6 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         
-        /* Стили для страницы руководителя */
         .leader-page {
             display: none;
             padding: 80px 20px;
@@ -352,7 +362,6 @@
                 height: 300px;
             }
             
-            /* Адаптация для мобильных устройств */
             .leaders-grid .card {
                 min-width: 150px;
                 max-width: 100%;
@@ -364,7 +373,10 @@
     <!-- Главная страница -->
     <div id="main-page">
         <header>
-            <h1>МБОУ СОШ №25</h1>
+            <div class="header-title">
+                <img src="https://i.postimg.cc/XNwmKjVv/1231231212.png" alt="Иконка школы" class="school-icon">
+                <h1>МБОУ СОШ №25</h1>
+            <div>
             <p class="subtitle">Школа с богатой историей и традициями, где каждый ученик может раскрыть свой потенциал</p>
         </header>
         
