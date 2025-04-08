@@ -10,3 +10,6 @@
     max-width: 250px; /* Максимальная ширина */
 }
 
+.leader-photo {
+    align-self: flex-start;
+}
