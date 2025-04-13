@@ -354,13 +354,15 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease;
-            display: block;
+            opacity: 0;
             padding-left: 20px;
             box-sizing: border-box;
+            margin-top: 5px;
         }
         
         .awards-full.show {
-            max-height: 1000px; /* Достаточно большое значение */
+            max-height: 1000px;
+            opacity: 1;
         }
         
         .toggle-awards-btn {
@@ -372,7 +374,8 @@
             margin-top: 5px;
             font-size: 0.9em;
             text-decoration: underline;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            display: inline-block;
         }
         
         .toggle-awards-btn:hover {
@@ -380,10 +383,11 @@
         }
         
         .toggle-awards-btn::after {
-            content: "";
+            content: "▼";
             font-size: 0.8em;
             margin-left: 5px;
             transition: transform 0.3s ease;
+            display: inline-block;
         }
         
         .toggle-awards-btn.expanded::after {
@@ -860,17 +864,18 @@
         // Управление отображением наград
         document.querySelectorAll('.toggle-awards-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                const fullAwards = this.parentElement.querySelector('.awards-full');
+                const container = this.parentElement;
+                const fullAwards = container.querySelector('.awards-full');
                 
                 if (fullAwards.classList.contains('show')) {
                     // Сворачиваем
                     fullAwards.classList.remove('show');
-                    this.textContent = 'Показать все награды';
+                    this.textContent = 'Показать полный список наград';
                     this.classList.remove('expanded');
                 } else {
                     // Разворачиваем
                     fullAwards.classList.add('show');
-                    this.textContent = 'Свернуть награды';
+                    this.textContent = 'Свернуть список наград';
                     this.classList.add('expanded');
                 }
             });
