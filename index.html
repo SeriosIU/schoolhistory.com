@@ -342,41 +342,30 @@
         
         /* Стили для скрытия/раскрытия наград */
         .awards-container {
-            margin-top: 10px;
-        }
-        
-        .awards-header {
-            display: flex;
-            align-items: baseline;
+            position: relative;
         }
         
         .awards-preview {
-            margin-left: 5px;
+            display: inline;
         }
         
         .awards-full {
             display: none;
-            padding-left: 20px;
-            margin-top: 5px;
-        }
-        
-        .awards-full.show {
-            display: block;
         }
         
         .toggle-awards-btn {
             background: none;
             border: none;
-            color: #2c5aa0;
+            color: var(--primary);
             cursor: pointer;
             padding: 5px 0;
-            margin-left: 5px;
+            margin-top: 5px;
             font-size: 0.9em;
             text-decoration: underline;
         }
         
         .toggle-awards-btn:hover {
-            color: #ff6b6b;
+            color: var(--accent);
         }
         
         @media (max-width: 768px) {
@@ -850,19 +839,17 @@
         document.querySelectorAll('.toggle-awards-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const container = this.closest('.awards-container');
-                const fullAwards = container.querySelector('.awards-full');
                 const preview = container.querySelector('.awards-preview');
+                const full = container.querySelector('.awards-full');
                 
-                if (fullAwards.classList.contains('show')) {
-                    // Сворачиваем
-                    fullAwards.classList.remove('show');
-                    preview.style.display = 'inline';
-                    this.textContent = 'Показать все';
-                } else {
-                    // Разворачиваем
-                    fullAwards.classList.add('show');
+                if (full.style.display === 'none' || !full.style.display) {
+                    full.style.display = 'inline';
                     preview.style.display = 'none';
-                    this.textContent = 'Скрыть';
+                    this.textContent = 'Свернуть награды';
+                } else {
+                    full.style.display = 'none';
+                    preview.style.display = 'inline';
+                    this.textContent = 'Показать все награды';
                 }
             });
         });
