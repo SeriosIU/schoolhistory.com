@@ -836,19 +836,22 @@
         });
 
         // Управление отображением наград
-        document.querySelector('.toggle-awards-btn')?.addEventListener('click', function() {
-            const preview = document.querySelector('.awards-preview');
-            const full = document.querySelector('.awards-full');
-            
-            if (full.style.display === 'none' || !full.style.display) {
-                full.style.display = 'inline';
-                preview.style.display = 'none';
-                this.textContent = 'Свернуть награды';
-            } else {
-                full.style.display = 'none';
-                preview.style.display = 'inline';
-                this.textContent = 'Показать все награды';
-            }
+        document.querySelectorAll('.toggle-awards-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const container = this.closest('.awards-container');
+                const preview = container.querySelector('.awards-preview');
+                const full = container.querySelector('.awards-full');
+                
+                if (full.style.display === 'none' || !full.style.display) {
+                    full.style.display = 'inline';
+                    preview.style.display = 'none';
+                    this.textContent = 'Свернуть награды';
+                } else {
+                    full.style.display = 'none';
+                    preview.style.display = 'inline';
+                    this.textContent = 'Показать все награды';
+                }
+            });
         });
 
         // Анимация появления карточек при прокрутке
