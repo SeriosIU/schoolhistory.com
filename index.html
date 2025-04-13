@@ -346,8 +346,13 @@
             margin-top: 10px;
         }
         
+        .awards-header {
+            display: flex;
+            align-items: baseline;
+        }
+        
         .awards-preview {
-            display: inline;
+            margin-left: 5px;
         }
         
         .awards-full {
@@ -371,7 +376,7 @@
             color: #2c5aa0;
             cursor: pointer;
             padding: 5px 0;
-            margin-top: 5px;
+            margin-left: 5px;
             font-size: 0.9em;
             text-decoration: underline;
             transition: all 0.3s ease;
@@ -864,18 +869,21 @@
         // Управление отображением наград
         document.querySelectorAll('.toggle-awards-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                const container = this.parentElement;
+                const container = this.closest('.awards-container');
                 const fullAwards = container.querySelector('.awards-full');
+                const preview = container.querySelector('.awards-preview');
                 
                 if (fullAwards.classList.contains('show')) {
                     // Сворачиваем
                     fullAwards.classList.remove('show');
-                    this.textContent = 'Показать полный список наград';
+                    preview.style.display = 'inline';
+                    this.textContent = 'Показать все';
                     this.classList.remove('expanded');
                 } else {
                     // Разворачиваем
                     fullAwards.classList.add('show');
-                    this.textContent = 'Свернуть список наград';
+                    preview.style.display = 'none';
+                    this.textContent = 'Скрыть';
                     this.classList.add('expanded');
                 }
             });
