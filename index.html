@@ -342,7 +342,6 @@
         
         /* Стили для скрытия/раскрытия наград */
         .awards-container {
-            position: relative;
             margin-top: 10px;
         }
         
@@ -356,18 +355,13 @@
         }
         
         .awards-full {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-            opacity: 0;
+            display: none;
             padding-left: 20px;
-            box-sizing: border-box;
             margin-top: 5px;
         }
         
         .awards-full.show {
-            max-height: 1000px;
-            opacity: 1;
+            display: block;
         }
         
         .toggle-awards-btn {
@@ -379,24 +373,10 @@
             margin-left: 5px;
             font-size: 0.9em;
             text-decoration: underline;
-            transition: all 0.3s ease;
-            display: inline-block;
         }
         
         .toggle-awards-btn:hover {
             color: #ff6b6b;
-        }
-        
-        .toggle-awards-btn::after {
-            content: "▼";
-            font-size: 0.8em;
-            margin-left: 5px;
-            transition: transform 0.3s ease;
-            display: inline-block;
-        }
-        
-        .toggle-awards-btn.expanded::after {
-            transform: rotate(180deg);
         }
         
         @media (max-width: 768px) {
@@ -878,13 +858,11 @@
                     fullAwards.classList.remove('show');
                     preview.style.display = 'inline';
                     this.textContent = 'Показать все';
-                    this.classList.remove('expanded');
                 } else {
                     // Разворачиваем
                     fullAwards.classList.add('show');
                     preview.style.display = 'none';
                     this.textContent = 'Скрыть';
-                    this.classList.add('expanded');
                 }
             });
         });
