@@ -1014,6 +1014,52 @@
         // Запускаем анимации при прокрутке и при загрузке
         window.addEventListener('scroll', animateCards);
         window.addEventListener('load', animateCards);
+
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+        // Обработчик кликов по карточкам галереи
+        document.querySelectorAll('.gallery-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                const galleryId = this.getAttribute('data-gallery');
+            
+                // Скрываем основной контент
+                document.getElementById('main-page').style.display = 'none';
+                
+                // Показываем нужную галерею
+                document.getElementById('gallery-pages').style.display = 'block';
+                document.getElementById(`gallery-page-${galleryId}`).style.display = 'block';
+            
+                // Прокрутка вверх
+                window.scrollTo(0, 0);
+            });
+        });
+
+            // Обработчик кнопки "Назад"
+            document.querySelectorAll('.back-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+            
+                    // Скрываем все страницы галерей
+                    document.querySelectorAll('.gallery-page').forEach(page => {
+                        page.style.display = 'none';
+                    });
+                    document.getElementById('gallery-pages').style.display = 'none';
+                
+                    // Показываем основной контент
+                    document.getElementById('main-page').style.display = 'block';
+                
+                    // Прокрутка к разделу галереи
+                    document.getElementById('gallery').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
     </script>
 </body>
 </html>
