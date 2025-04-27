@@ -847,96 +847,47 @@
         </div>
         <!-- Остальные галереи -->
     </div>
-       <script>
-        // Обработка кликов на карточки руководителей
-        document.querySelectorAll('.leader-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const leaderId = this.getAttribute('data-id');
-                showPage('leader', leaderId);
-            });
-        });
-
-        // Обработка кликов на карточки галереи
-        document.querySelectorAll('.gallery-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const galleryId = this.getAttribute('data-id');
-                showPage('gallery', galleryId);
-            });
-        });
-
-        // Показать страницу (руководителя или галереи)
-        function showPage(type, id) {
-            document.getElementById('main-page').style.display = 'none';
-            document.getElementById('leader-pages').style.display = 'none';
-            document.getElementById('gallery-pages').style.display = 'none';
-            
-            if (type === 'leader') {
-                document.getElementById('leader-pages').style.display = 'block';
-                document.querySelectorAll('.leader-page').forEach(page => {
-                    page.style.display = 'none';
-                });
-                document.getElementById(`leader-${id}`).style.display = 'block';
-            } else {
-                document.getElementById('gallery-pages').style.display = 'block';
-                document.querySelectorAll('.gallery-page').forEach(page => {
-                    page.style.display = 'none';
-                });
-                document.getElementById(`gallery-${id}`).style.display = 'block';
-            }
-            
-            window.scrollTo(0, 0);
+    <script>
+    // Данные для галереи (можно вынести в отдельный файл или оставить здесь)
+    const galleryData = {
+        1: {
+            title: "1980-е годы - Принятие школы",
+            mainPhoto: "https://i.postimg.cc/vHKjtbx0/image.png",
+            photos: [
+                "https://i.postimg.cc/vHKjtbx0/image.png",
+                "https://example.com/gallery1_1.jpg",
+                "https://example.com/gallery1_2.jpg"
+            ],
+            description: "Исторические моменты основания школы в 1980-х годах."
+        },
+        2: {
+            title: "1986 год - Коллектив школы",
+            mainPhoto: "https://i.postimg.cc/mhfGnf29/image.png",
+            photos: [
+                "https://i.postimg.cc/mhfGnf29/image.png",
+                "https://example.com/gallery2_1.jpg",
+                "https://example.com/gallery2_2.jpg"
+            ],
+            description: "Педагогический коллектив школы в первые годы работы."
         }
+        // Добавьте остальные галереи по аналогии
+    };
 
-        // Кнопки "Назад"
-        document.querySelectorAll('.back-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.getElementById('main-page').style.display = 'block';
-                document.getElementById('leader-pages').style.display = 'none';
-                document.getElementById('gallery-pages').style.display = 'none';
-                
-                // Прокрутка к соответствующему разделу
-                const fromGallery = this.closest('.gallery-page');
-                if (fromGallery) {
-                    document.getElementById('gallery').scrollIntoView({behavior: 'smooth'});
-                } else {
-                    document.getElementById('leaders').scrollIntoView({behavior: 'smooth'});
-                }
-            });
-        });
+    // Данные руководителей (сокращенный вариант)
+    const leadersData = {
+        1: {
+            name: "Кливер Валентина Ивановна",
+            position: "1й директор школы",
+            years: "1986 - 1988",
+            photo: "https://i.postimg.cc/Z5crJ2xH/1987-1-1.png",
+            bio: "Биография первого директора школы..."
+        }
+        // Добавьте остальных руководителей по аналогии
+    };
 
-        // Данные о руководителях
-        const leadersData = {
-            1: {
-                name: "Иванова Мария Петровна",
-                position: "Директор школы",
-                photo: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
-                years: "с 2010 года по настоящее время",
-                education: "Высшее педагогическое, кандидат наук",
-                awards: "Заслуженный учитель РФ",
-                bio: [
-                    {
-                        title: "Биография",
-                        content: "Иванова Мария Петровна родилась 15 марта 1968 года в городе Москве. Окончила Московский педагогический государственный университет в 1990 году по специальности 'Математика'."
-                    },
-                    {
-                        title: "Профессиональная деятельность",
-                        content: "Начала свою педагогическую деятельность в 1990 году учителем математики в школе №15. С 1995 года занимала должность заместителя директора по учебной работе. В 2010 году была назначена директором школы №25."
-                    },
-                    {
-                        title: "Достижения",
-                        content: "Под руководством Марии Петровны школа трижды становилась лауреатом конкурса 'Лучшая школа года'. В 2015 году получила звание Заслуженного учителя Российской Федерации."
-                    },
-                    {
-                        title: "Публикации",
-                        content: "Автор более 20 научных публикаций по методике преподавания математики и управлению образовательными учреждениями."
-                    }
-                ]
-            },
-            // Аналогично для других руководителей...
-        };
-
-        // Обработка кликов на карточки руководителей
+    // Инициализация при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+        // Обработчики для карточек руководителей
         document.querySelectorAll('.leader-card').forEach(card => {
             card.addEventListener('click', function() {
                 const leaderId = this.getAttribute('data-id');
@@ -944,32 +895,118 @@
             });
         });
 
+        // Обработчики для карточек галереи
+        document.querySelectorAll('.gallery-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const galleryId = this.getAttribute('data-id');
+                showGalleryPage(galleryId);
+            });
+        });
+
+        // Обработчики для кнопок "Назад"
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showMainPage();
+            });
+        });
+
+        // Инициализация анимаций
+        initAnimations();
+    });
+
+    // Показать страницу руководителя
+    function showLeaderPage(leaderId) {
+        // Скрываем главную страницу и другие страницы
+        document.getElementById('main-page').style.display = 'none';
+        document.getElementById('gallery-pages').style.display = 'none';
+        
+        // Показываем контейнер страниц руководителей
+        const leaderPages = document.getElementById('leader-pages');
+        leaderPages.style.display = 'block';
+        
+        // Скрываем все страницы руководителей
+        document.querySelectorAll('.leader-page').forEach(page => {
+            page.style.display = 'none';
+        });
+    
+        // Показываем нужную страницу
+        const leaderPage = document.getElementById(`leader-${leaderId}`);
+        if (leaderPage) {
+            leaderPage.style.display = 'block';
+            
+            // Заполняем данными (можно заменить на статический HTML)
+            const leader = leadersData[leaderId];
+            if (leader) {
+                leaderPage.querySelector('h2').textContent = leader.name;
+                leaderPage.querySelector('.position').textContent = leader.position;
+                leaderPage.querySelector('.leader-photo img').src = leader.photo;
+                leaderPage.querySelector('.leader-bio p').textContent = leader.bio;
+            }
         }
+        
+        // Прокрутка вверх
+        window.scrollTo(0, 0);
+    }
+    
+    // Показать страницу галереи
+    function showGalleryPage(galleryId) {
+        // Скрываем главную страницу и другие страницы
+        document.getElementById('main-page').style.display = 'none';
+        document.getElementById('leader-pages').style.display = 'none';
+        
+        // Показываем контейнер страниц галереи
+        const galleryPages = document.getElementById('gallery-pages');
+        galleryPages.style.display = 'block';
+        
+        // Скрываем все страницы галереи
+        document.querySelectorAll('.gallery-page').forEach(page => {
+            page.style.display = 'none';
+        });
+        
+        // Показываем нужную страницу
+        const galleryPage = document.getElementById(`gallery-${galleryId}`);
+        if (galleryPage) {
+            galleryPage.style.display = 'block';
+            
+            // Заполняем данными
+            const gallery = galleryData[galleryId];
+            if (gallery) {
+                galleryPage.querySelector('h2').textContent = gallery.title;
                 
+                // Очищаем контейнер с фото
+                const photosContainer = galleryPage.querySelector('.gallery-photos');
+                photosContainer.innerHTML = '';
+                
+                // Добавляем фото
+                gallery.photos.forEach(photoUrl => {
+                    const photoDiv = document.createElement('div');
+                    photoDiv.className = 'gallery-photo';
+                    photoDiv.innerHTML = `<img src="${photoUrl}" alt="Фото из галереи">`;
+                    photosContainer.appendChild(photoDiv);
                 });
-            });
-        });
-
-        // Управление отображением наград
-        document.querySelectorAll('.toggle-awards-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const container = this.closest('.awards-container');
-                const preview = container.querySelector('.awards-preview');
-                const full = container.querySelector('.awards-full');
                 
-                if (full.style.display === 'none' || !full.style.display) {
-                    full.style.display = 'inline';
-                    preview.style.display = 'none';
-                    this.textContent = 'Свернуть награды';
-                } else {
-                    full.style.display = 'none';
-                    preview.style.display = 'inline';
-                    this.textContent = 'Показать все награды';
-                }
-            });
-        });
+                // Заполняем описание
+                galleryPage.querySelector('.gallery-description p').textContent = gallery.description;
+            }
+        }
+    
+        // Прокрутка вверх
+        window.scrollTo(0, 0);
+    }
 
-        // Анимация появления карточек при прокрутке
+    // Показать главную страницу
+    function showMainPage() {
+        document.getElementById('main-page').style.display = 'block';
+        document.getElementById('leader-pages').style.display = 'none';
+        document.getElementById('gallery-pages').style.display = 'none';
+        
+        // Прокрутка к верху страницы
+        window.scrollTo(0, 0);
+    }
+    
+    // Инициализация анимаций
+    function initAnimations() {
         const animateCards = () => {
             const cards = document.querySelectorAll('.card, .history-item');
             const windowHeight = window.innerHeight;
@@ -985,16 +1022,17 @@
             });
         };
         
-        // Изначально скрываем карточки (появятся при прокрутке)
+        // Изначально скрываем карточки
         document.querySelectorAll('.card, .history-item').forEach(card => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(20px)';
             card.style.transition = 'all 0.6s ease';
         });
-        
-        // Запускаем анимации при прокрутке и при загрузке
+    
+        // Запускаем анимации
         window.addEventListener('scroll', animateCards);
         window.addEventListener('load', animateCards);
+    }
     </script>
 </body>
 </html>
