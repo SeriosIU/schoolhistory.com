@@ -944,29 +944,8 @@
             });
         });
 
-        // Показать страницу руководителя
-        function showLeaderPage(leaderId) {
-            document.getElementById('main-page').style.display = 'none';
-            document.getElementById('leader-pages').style.display = 'block';
-            document.querySelectorAll('.leader-page').forEach(page => {
-                page.style.display = 'none';
-            });
-            document.getElementById(`leader-${leaderId}`).style.display = 'block';
-            
-            // Прокрутка вверх
-            window.scrollTo(0, 0);
         }
-
-        // Кнопка "Назад"
-        document.querySelectorAll('.back-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.getElementById('main-page').style.display = 'block';
-                document.getElementById('leader-pages').style.display = 'none';
                 
-                // Прокрутка к разделу руководителей
-                document.getElementById('leaders').scrollIntoView({
-                    behavior: 'smooth'
                 });
             });
         });
