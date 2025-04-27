@@ -608,7 +608,29 @@
                 <a href="#" class="btn">Узнать подробнее</a>
             </div>
         </section>
-        
+                <!-- Страницы галереи -->
+        <div id="gallery-pages">
+            <!-- Галерея 1 -->
+            <div class="gallery-page" id="gallery-1">
+                <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i>Назад к фотоархиву</a>
+                <h2>1980-е годы - Принятие школы</h2>
+                
+                <div class="gallery-photos">
+                    <div class="gallery-photo">
+                        <img src="https://i.postimg.cc/vHKjtbx0/image.png" alt="Принятие школы">
+                    </div>
+                    <div class="gallery-photo">
+                        <img src="https://example.com/photo1.jpg" alt="Дополнительное фото 1">
+                    </div>
+                    <div class="gallery-photo">
+                        <img src="https://example.com/photo2.jpg" alt="Дополнительное фото 2">
+                    </div>
+                </div>
+                
+                <div class="gallery-description">
+                    <p>Исторические моменты основания школы в 1980-х годах.</p>
+                </div>
+        </div>
         <footer>
             <p>© 2025 МБОУ СОШ №25. Все права защищены.</p>
             <p>Контактный телефон: +7 (38475) 3-14-12</p>
@@ -774,6 +796,36 @@
     </div>
 
     <script>
+        // Обработка кликов на карточки галереи
+        document.querySelectorAll('.gallery-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const galleryId = this.getAttribute('data-id');
+                showGalleryPage(galleryId);
+            });
+        });
+
+        // Показать страницу галереи
+        function showGalleryPage(galleryId) {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('gallery-pages').style.display = 'block';
+            document.querySelectorAll('.gallery-page').forEach(page => {
+                page.style.display = 'none';
+            });
+            document.getElementById(`gallery-${galleryId}`).style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        // Кнопка "Назад" в галерее
+        document.querySelectorAll('.gallery-page .back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('main-page').style.display = 'block';
+                document.getElementById('gallery-pages').style.display = 'none';
+                document.getElementById('gallery').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
         // Данные о руководителях
         const leadersData = {
             1: {
