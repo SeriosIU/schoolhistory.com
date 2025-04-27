@@ -397,93 +397,6 @@
                 max-width: 100%;
             }
         }
-        .gallery-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: transform 0.3s;
-            height: 250px;
-        }
-        
-        .gallery-item:hover {
-            transform: translateY(-5px);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-        
-        .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 15px;
-        }
-        
-        /* Стили для страницы отдельной галереи */
-        .gallery-page {
-            display: none;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .back-button {
-            display: inline-block;
-            margin-bottom: 20px;
-            padding: 10px 15px;
-            background: #2c5aa0;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-        }
-        
-        .gallery-page-title {
-            margin-bottom: 30px;
-        }
-        
-        .expanded-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-        }
-        
-        .expanded-photo {
-            height: 200px;
-            overflow: hidden;
-            border-radius: 6px;
-        }
-        
-        .expanded-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
     </style>
 </head>
 <body>
@@ -686,7 +599,7 @@
                     </div>
                 </div>
             </div>
-       </section>
+        </section>
         
         <section id="olympiad">
             <div class="olympiad">
@@ -695,22 +608,7 @@
                 <a href="#" class="btn">Узнать подробнее</a>
             </div>
         </section>
-            <div id="gallery-pages">
-                <!-- Галерея 1 -->
-                <div class="gallery-page" id="gallery-1">
-                    <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i> Назад к фотоархиву</a>
-                    <h2>1980-е годы - Принятие школы</h2>
-            
-                    <div class="expanded-gallery">
-                        <div class="expanded-photo">
-                            <img src="https://i.postimg.cc/vHKjtbx0/image.png" alt="Принятие школы">
-                        </div>
-                        <div class="expanded-photo">
-                            <img src="https://example.com/photo1.jpg" alt="Дополнительное фото">
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
         <footer>
             <p>© 2025 МБОУ СОШ №25. Все права защищены.</p>
             <p>Контактный телефон: +7 (38475) 3-14-12</p>
@@ -876,33 +774,6 @@
     </div>
 
     <script>
-        // Обработка кликов по фотографиям
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const galleryId = this.getAttribute('data-gallery');
-                
-                // Скрываем основную галерею
-                document.getElementById('main-gallery').style.display = 'none';
-                
-                // Показываем выбранную галерею
-                document.getElementById(`gallery-${galleryId}`).style.display = 'block';
-            });
-        });
-        
-        // Обработка кнопки "Назад"
-        document.querySelectorAll('.back-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Скрываем все страницы галерей
-                document.querySelectorAll('.gallery-page').forEach(page => {
-                    page.style.display = 'none';
-                });
-                
-                // Показываем основную галерею
-                document.getElementById('main-gallery').style.display = 'block';
-            });
-        });
         // Данные о руководителях
         const leadersData = {
             1: {
@@ -1014,48 +885,6 @@
         // Запускаем анимации при прокрутке и при загрузке
         window.addEventListener('scroll', animateCards);
         window.addEventListener('load', animateCards);
-        document.addEventListener('DOMContentLoaded', function() {
-
-            
-            // Обработчик кликов по карточкам галереи
-            document.querySelectorAll('.gallery-card').forEach(card => {
-                card.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const galleryId = this.getAttribute('data-gallery');
-            
-                    // Скрываем основной контент
-                    document.getElementById('main-page').style.display = 'none';
-            
-                    // Показываем нужную галерею
-                    document.getElementById('gallery-pages').style.display = 'block';
-                    document.getElementById(`gallery-page-${galleryId}`).style.display = 'block';
-            
-                    // Прокрутка вверх
-                    window.scrollTo(0, 0);
-                });
-            });
-
-            // Обработчик кнопки "Назад"
-            document.querySelectorAll('.back-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-            
-                    // Скрываем все страницы галерей
-                    document.querySelectorAll('.gallery-page').forEach(page => {
-                        page.style.display = 'none';
-                    });
-                    document.getElementById('gallery-pages').style.display = 'none';
-            
-                    // Показываем основной контент
-                    document.getElementById('main-page').style.display = 'block';
-            
-                    // Прокрутка к разделу галереи
-                    document.getElementById('gallery').scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-        });
     </script>
 </body>
 </html>
