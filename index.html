@@ -928,15 +928,6 @@
 
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Обработчики для руководителей
-            document.querySelectorAll('.leader-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    const leaderId = this.getAttribute('data-id');
-                    showPage('leader', leaderId);
-                });
-            });
-            
-            // Обработчики для галереи
             document.querySelectorAll('.gallery-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const galleryId = this.getAttribute('data-id');
