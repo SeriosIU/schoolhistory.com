@@ -397,27 +397,6 @@
                 max-width: 100%;
             }
         }
-        .photo-container {
-            margin-top: 30px;
-        }
-        
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-        }
-        
-        .photo-item {
-            height: 200px;
-            overflow: hidden;
-            border-radius: 6px;
-        }
-        
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
     </style>
 </head>
 <body>
@@ -619,25 +598,6 @@
                         <p>Учительский состав</p>
                     </div>
                 </div>
-            </div>
-            <div id="gallery-pages">
-                <!-- Галерея 1 -->
-                <div id="gallery-page-1" class="page-content">
-                    <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i> Назад</a>
-                    <h2>1980-е годы - Принятие школы</h2>
-                    <div class="photo-container">
-                        <div class="photo-grid">
-                            <div class="photo-item">
-                                <img src="https://i.postimg.cc/vHKjtbx0/image.png" alt="Фото 1">
-                            </div>
-                            <div class="photo-item">
-                                <img src="https://via.placeholder.com/600x400" alt="Фото 2">
-                            </div>
-                            <!-- Другие фото -->
-                        </div>
-                    </div>
-                </div>
-                <!-- Другие галереи -->
             </div>
         </section>
         
@@ -925,59 +885,6 @@
         // Запускаем анимации при прокрутке и при загрузке
         window.addEventListener('scroll', animateCards);
         window.addEventListener('load', animateCards);
-
-
-        document.querySelectorAll('.gallery-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const galleryId = this.getAttribute('data-id');
-                showPage('gallery', galleryId);
-            });
-        });
-            
-        // Обработчики кнопки "Назад"
-        document.querySelectorAll('.back-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                showMainPage();
-            });
-        });
-            
-        // Функция показа страницы
-        function showPage(type, id) {
-            // Скрываем основной контент
-            document.getElementById('main-content').style.display = 'none';
-                
-            // Скрываем все страницы
-            document.querySelectorAll('.page-content').forEach(page => {
-                page.style.display = 'none';
-            });
-                
-            // Показываем нужную страницу
-            if (type === 'leader') {
-                document.getElementById('leader-pages').style.display = 'block';
-                document.getElementById(`${type}-page-${id}`).style.display = 'block';
-            } else {
-                document.getElementById('gallery-pages').style.display = 'block';
-                document.getElementById(`${type}-page-${id}`).style.display = 'block';
-            }
-                
-            // Прокрутка вверх
-            window.scrollTo(0, 0);
-            }
-            
-            // Функция показа главной страницы
-            function showMainPage() {
-                // Показываем основной контент
-                document.getElementById('main-content').style.display = 'block';
-                
-                // Скрываем все страницы
-                document.getElementById('leader-pages').style.display = 'none';
-                document.getElementById('gallery-pages').style.display = 'none';
-                
-                // Прокрутка вверх
-                window.scrollTo(0, 0);
-            }
-        });
     </script>
 </body>
 </html>
