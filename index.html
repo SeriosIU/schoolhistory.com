@@ -984,43 +984,41 @@
         window.addEventListener('scroll', animateCards);
         window.addEventListener('load', animateCards);
 
-
-                // Ждем загрузки DOM
-        document.addEventListener('DOMContentLoaded', function() {
-            // Обработчик кликов по фотографиям
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const photoId = this.getAttribute('data-photo-id');
-                    
-                    // Скрываем основную галерею
-                    document.getElementById('main-gallery').style.display = 'none';
-                    
-                    // Показываем страницу с выбранным фото
-                    document.getElementById('photo-pages').style.display = 'block';
-                    document.getElementById(`photo-page-${photoId}`).style.display = 'block';
-                    
-                    // Прокрутка вверх
-                    window.scrollTo(0, 0);
-                });
-            });
-            
-            // Обработчик кнопки "Назад"
-            document.querySelectorAll('.back-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Скрываем все страницы фото
-                    document.querySelectorAll('.photo-page').forEach(page => {
-                        page.style.display = 'none';
-                    });
-                    document.getElementById('photo-pages').style.display = 'none';
-                    
-                    // Показываем основную галерею
-                    document.getElementById('main-gallery').style.display = 'block';
-                    
-                    // Прокрутка вверх
-                    window.scrollTo(0, 0);
-                });
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+        
+                // Создаем новое окно
+                const newWindow = window.open('', '_blank');
+        
+                // Добавляем содержимое в новое окно
+                newWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Фотоархив</title>
+                        <style>
+                            body { 
+                                display: flex; 
+                                justify-content: center; 
+                                align-items: center; 
+                                height: 100vh; 
+                                margin: 0; 
+                                font-family: Arial, sans-serif;
+                                background-color: #f0f0f0;
+                            }
+                            h1 {
+                                font-size: 3em;
+                                color: #2c5aa0;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Это работает! 🎉</h1>
+                    </body>
+                    </html>
+                `);
+                newWindow.document.close();
             });
         });
     </script>
