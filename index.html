@@ -927,43 +927,42 @@
         window.addEventListener('load', animateCards);
 
 
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.gallery-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    const galleryId = this.getAttribute('data-id');
-                    showPage('gallery', galleryId);
-                });
+        document.querySelectorAll('.gallery-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const galleryId = this.getAttribute('data-id');
+                showPage('gallery', galleryId);
             });
+        });
             
-            // Обработчики кнопки "Назад"
-            document.querySelectorAll('.back-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    showMainPage();
-                });
+        // Обработчики кнопки "Назад"
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showMainPage();
             });
+        });
             
-            // Функция показа страницы
-            function showPage(type, id) {
-                // Скрываем основной контент
-                document.getElementById('main-content').style.display = 'none';
+        // Функция показа страницы
+        function showPage(type, id) {
+            // Скрываем основной контент
+            document.getElementById('main-content').style.display = 'none';
                 
-                // Скрываем все страницы
-                document.querySelectorAll('.page-content').forEach(page => {
-                    page.style.display = 'none';
-                });
+            // Скрываем все страницы
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.style.display = 'none';
+            });
                 
-                // Показываем нужную страницу
-                if (type === 'leader') {
-                    document.getElementById('leader-pages').style.display = 'block';
-                    document.getElementById(`${type}-page-${id}`).style.display = 'block';
-                } else {
-                    document.getElementById('gallery-pages').style.display = 'block';
-                    document.getElementById(`${type}-page-${id}`).style.display = 'block';
-                }
+            // Показываем нужную страницу
+            if (type === 'leader') {
+                document.getElementById('leader-pages').style.display = 'block';
+                document.getElementById(`${type}-page-${id}`).style.display = 'block';
+            } else {
+                document.getElementById('gallery-pages').style.display = 'block';
+                document.getElementById(`${type}-page-${id}`).style.display = 'block';
+            }
                 
-                // Прокрутка вверх
-                window.scrollTo(0, 0);
+            // Прокрутка вверх
+            window.scrollTo(0, 0);
             }
             
             // Функция показа главной страницы
