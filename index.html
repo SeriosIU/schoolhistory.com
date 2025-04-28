@@ -987,33 +987,33 @@
         window.addEventListener('load', animateCards);
 
         document.addEventListener('DOMContentLoaded', function() {
-        // Завершение обработки элементов для анимации
-        window.addEventListener('load', animateCards);
+            // Завершение обработки элементов для анимации
+            window.addEventListener('load', animateCards);
 
-        // Обработка events в photoarchive
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
+            // Обработка events в photoarchive
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
                 
-                // Создаем новое iframe
-                const newFrame = document.createElement('iframe');
-                newFrame.style.marginTop = '20px';
-                newFrame.src = '';
-                document.body.appendChild(newFrame);
+                    // Создаем новое iframe
+                    const newFrame = document.createElement('iframe');
+                    newFrame.style.marginTop = '20px';
+                    newFrame.src = '';
+                    document.body.appendChild(newFrame);
                 
-                // Добавляем содержимое в iframe
-                const contentDiv = document.createElement('div');
-                contentDiv.innerHTML = `
-                    <!DOCTYPE html>
-                    <html>
-                    <head></head>
-                    <body style="width: 100%; height: 100%">
-                        ${this.innerHTML}
-                    </body>
-                    </html>
-                `;
+                    // Добавляем содержимое в iframe
+                    const contentDiv = document.createElement('div');
+                    contentDiv.innerHTML = `
+                        <!DOCTYPE html>
+                        <html>
+                        <head></head>
+                        <body style="width: 100%; height: 100%">
+                            ${this.innerHTML}
+                        </body>
+                        </html>
+                    `;
                 
-                newFrame.appendChild(contentDiv);
+                    newFrame.appendChild(contentDiv);
                 });
             });
         });
