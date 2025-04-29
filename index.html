@@ -397,6 +397,25 @@
                 max-width: 100%;
             }
         }
+        /* Добавляем стили для страниц фото */
+        .photo-page {
+            display: none;
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+    
+        .photo-page .back-btn {
+            margin-bottom: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+    
+        .photo-page .back-btn:hover {
+            color: var(--accent);
+        }
     </style>
 </head>
 <body>
@@ -885,6 +904,39 @@
         // Запускаем анимации при прокрутке и при загрузке
         window.addEventListener('scroll', animateCards);
         window.addEventListener('load', animateCards);
+
+
+        // Обработка кликов на фотоархив
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const photoId = this.getAttribute('data-photo-id');
+                showPhotoPage(photoId);
+            });
+        });
+
+        // Показать страницу с фото
+        function showPhotoPage(photoId) {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('photo-pages').style.display = 'block';
+            document.querySelectorAll('.photo-page').forEach(page => {
+                page.style.display = 'none';
+            });
+            document.getElementById(`photo-page-${photoId}`).style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        // Обработка кнопки "Назад" для фотоархива
+        document.querySelectorAll('.photo-page .back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('main-page').style.display = 'block';
+                document.getElementById('photo-pages').style.display = 'none';
+                document.getElementById('gallery').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
 </body>
 </html>
