@@ -982,7 +982,6 @@
 
 
 
-        // Обработчики для фотоархива (аналогично директорам)
         document.querySelectorAll('.gallery-item').forEach(item => {
             item.addEventListener('click', function() {
                 const photoId = this.dataset.photo;
@@ -990,15 +989,24 @@
             });
         });
 
+        // Показать страницу с фото
         function showPhotoPage(photoId) {
-            // Скрываем главную страницу
+            // Скрыть главную страницу
             document.getElementById('main-page').style.display = 'none';
+    
+            // Показать страницы с фото
             document.getElementById('photo-pages').style.display = 'block';
+    
+            // Скрыть все страницы фото
             document.querySelectorAll('.photo-page').forEach(page => {
                 page.style.display = 'none';
             });
+    
+            // Показать нужную страницу
             document.getElementById(`photo-${photoId}`).style.display = 'block';
-            window.scrollTo(0, 0);
+    
+            // Прокрутка вверх
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Обработчик кнопки "Назад"
@@ -1007,11 +1015,7 @@
                 e.preventDefault();
                 document.getElementById('main-page').style.display = 'block';
                 document.getElementById('photo-pages').style.display = 'none';
-            
-                // Плавная прокрутка к галерее
-                document.getElementById('gallery').scrollIntoView({
-                    behavior: 'smooth'
-                });
+                document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
