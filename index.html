@@ -397,25 +397,6 @@
                 max-width: 100%;
             }
         }
-        /* Добавляем стили для страниц фото */
-        .photo-page {
-            display: none;
-            padding: 80px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-    
-        .photo-page .back-btn {
-            margin-bottom: 30px;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-    
-        .photo-page .back-btn:hover {
-            color: var(--accent);
-        }
     </style>
 </head>
 <body>
@@ -615,21 +596,6 @@
                     <div class="card-content">
                         <h3>2000 год</h3>
                         <p>Учительский состав</p>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-item" data-photo-id="1">
-                <div id="photo-pages">
-                    <div id="photo-page-1" class="photo-page">
-                        <div class="card">
-                            <div class="card-img">
-                                <img src="https://i.postimg.cc/vHKjtbx0/image.png" alt="Принятие школы">
-                            </div>
-                            <div class="card-content">
-                                <h3>1980-е годы</h3>
-                                <p>Принятие школы</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -919,39 +885,6 @@
         // Запускаем анимации при прокрутке и при загрузке
         window.addEventListener('scroll', animateCards);
         window.addEventListener('load', animateCards);
-
-
-        // Обработка кликов на фотоархив
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                const photoId = this.getAttribute('data-photo-id');
-                showPhotoPage(photoId);
-            });
-        });
-
-        // Показать страницу с фото
-        function showPhotoPage(photoId) {
-            document.getElementById('main-page').style.display = 'none';
-            document.getElementById('photo-pages').style.display = 'block';
-            document.querySelectorAll('.photo-page').forEach(page => {
-                page.style.display = 'none';
-            });
-            document.getElementById(`photo-page-${photoId}`).style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        // Обработка кнопки "Назад" для фотоархива
-        document.querySelectorAll('.photo-page .back-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.getElementById('main-page').style.display = 'block';
-                document.getElementById('photo-pages').style.display = 'none';
-                document.getElementById('gallery').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
     </script>
 </body>
 </html>
