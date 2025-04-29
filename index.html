@@ -991,19 +991,11 @@
         function showPhotoPage(photoId) {
             // Скрываем главную страницу
             document.getElementById('main-page').style.display = 'none';
-        
-            // Показываем страницы с фото
             document.getElementById('photo-pages').style.display = 'block';
-            
-            // Скрываем все страницы фото
             document.querySelectorAll('.photo-page').forEach(page => {
                 page.style.display = 'none';
             });
-        
-            // Показываем нужную страницу
             document.getElementById(`photo-${photoId}`).style.display = 'block';
-        
-            // Прокрутка вверх
             window.scrollTo(0, 0);
         }
 
