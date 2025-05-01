@@ -1096,6 +1096,11 @@
     
         // Запуск при полной загрузке страницы
         window.addEventListener('DOMContentLoaded', init);
+
+        // Запускаем анимации при прокрутке и при загрузке
+        window.addEventListener('scroll', animateCards);
+        window.addEventListener('load', animateCards);
+        
     </script>
     <div id="gallery-pages">
         <!-- Страница галереи 1 -->
