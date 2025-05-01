@@ -12,7 +12,7 @@
 
 #gallery-pages {
     display: none;
-    padding: 40px 20px;
+    padding: 20px 20px;
     background: var(--light);
     min-height: 100vh;
 }
