@@ -1017,6 +1017,92 @@
         window.addEventListener('scroll', animateCards);
         window.addEventListener('load', animateCards);
 
+        // Данные для галерей (добавьте в начало скрипта)
+        const galleryData = {
+            1: {
+                title: "1980-е годы - Принятие школы",
+                description: "Первый педагогический состав и открытие школы",
+                mainPhoto: "https://i.postimg.cc/vHKjtbx0/image.png",
+                photos: [
+                    "https://i.postimg.cc/mhfGnf29/image.png",
+                    "https://i.postimg.cc/YSwzCXjx/1986-1987-2-1.png"
+                ],
+                details: `<p>Торжественное открытие школы №25 состоялось 1 сентября 1986 года.</p>
+                        <div class="historical-fact">
+                            <div class="fact-title">Интересный факт:</div>
+                            <p>Первыми учениками стали 647 детей из нового микрорайона</p>
+                        </div>`
+            },
+            2: {
+                title: "1986 год - Первый выпуск",
+                description: "Выпускники 1986-1987 учебного года",
+                mainPhoto: "https://i.postimg.cc/YSwzCXjx/1986-1987-2-1.png",
+                photos: [
+                    "https://i.postimg.cc/YSwzCXjx/1986-1987-2-1.png",
+                    "https://i.postimg.cc/2Sc5wqFP/1988.png"
+                ],
+                details: `<p>Первый выпускной вечер в истории школы. На фото:</p>
+                        <ul>
+                            <li>Классный руководитель - Петрова И.С.</li>
+                            <li>25 выпускников</li>
+                            <li>3 золотых медалиста</li>
+                        </ul>`
+            }
+        };
+        
+        // Обработчик кликов для галереи (добавьте в существующий скрипт)
+        document.querySelectorAll('#gallery .card').forEach((card, index) => {
+            card.setAttribute('data-gallery-id', index + 1);
+            card.addEventListener('click', function() {
+                const galleryId = this.getAttribute('data-gallery-id');
+                showGalleryPage(galleryId);
+            });
+        });
+        
+        function showGalleryPage(galleryId) {
+            const gallery = galleryData[galleryId];
+            if (!gallery) return;
+        
+            const galleryHTML = `
+                <div class="gallery-page">
+                    <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i>Назад в архив</a>
+                    <div class="gallery-container">
+                        <h2>${gallery.title}</h2>
+                        <p class="gallery-description">${gallery.description}</p>
+                        <div class="main-photo">
+                            <img src="${gallery.mainPhoto}" alt="${gallery.title}">
+                        </div>
+                        <div class="gallery-details">
+                            ${gallery.details}
+                        </div>
+                        ${gallery.photos.length > 1 ? `
+                        <h3>Дополнительные фото</h3>
+                        <div class="additional-photos">
+                            ${gallery.photos.map(photo => `
+                                <div class="photo-item">
+                                    <img src="${photo}" alt="Историческое фото">
+                                </div>
+                            `).join('')}
+                        </div>` : ''}
+                    </div>
+                </div>
+            `;
+        
+            document.getElementById('gallery-pages').innerHTML = galleryHTML;
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('gallery-pages').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        
+        // Обработчик кнопки "Назад" для галереи
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.back-btn')) {
+                e.preventDefault();
+                document.getElementById('main-page').style.display = 'block';
+                document.getElementById('gallery-pages').style.display = 'none';
+            }
+        });
+
         // Данные для галерей
         const galleryData = {
             1: {
