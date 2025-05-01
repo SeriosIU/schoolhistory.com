@@ -1037,187 +1037,54 @@
     
 
     <script>
-        // Состояние приложения
-        const AppState = {
-            currentPage: null,
-            backdrop: null,
-            isAnimating: false
-        };
-        
-        // Инициализация при полной загрузке страницы
-        window.addEventListener('DOMContentLoaded', () => {
-            initializePage();
-        });
-        
-        function initializePage() {
-            setupEventListeners();
-            setupScrollAnimations();
-            initializeCardTransitions();
-        }
-        
-        // Настройка всех обработчиков событий
-        function setupEventListeners() {
+        document.addEventListener('DOMContentLoaded', function() {
             // Обработчики для руководителей
             document.querySelectorAll('.leader-card').forEach(card => {
-                card.addEventListener('click', handleLeaderClick);
+                card.addEventListener('click', function() {
+                    const leaderId = this.dataset.id;
+                    showPage('leader', leaderId);
+                });
             });
         
             // Обработчики для галереи
             document.querySelectorAll('.gallery-card').forEach(card => {
-                card.addEventListener('click', handleGalleryClick);
-            });
-        
-            // Общие обработчики
-            document.addEventListener('click', e => {
-                if (e.target.closest('.back-btn')) handleBackClick(e);
-                if (e.target.classList.contains('page-backdrop')) handleBackdropClick(e);
-            });
-        }
-        
-        // Обработчик клика по руководителю
-        function handleLeaderClick(e) {
-            if (AppState.isAnimating) return;
-            const leaderId = this.dataset.id;
-            showPage('leader', leaderId);
-        }
-        
-        // Обработчик клика по галерее
-        function handleGalleryClick(e) {
-            if (AppState.isAnimating) return;
-            const galleryId = this.dataset.id;
-            showPage('gallery', galleryId);
-        }
-        
-        // Обработчик кнопки "Назад"
-        function handleBackClick(e) {
-            e.preventDefault();
-            if (AppState.isAnimating) return;
-            hideCurrentPage();
-        }
-        
-        // Обработчик клика по подложке
-        function handleBackdropClick(e) {
-            if (AppState.isAnimating) return;
-            hideCurrentPage();
-        }
-        
-        // Показать страницу
-        function showPage(pageType, pageId) {
-            AppState.isAnimating = true;
-            const mainPage = document.getElementById('main-page');
-            const targetPage = document.getElementById(`${pageType}-${pageId}`);
-        
-            if (!targetPage) {
-                console.error('Page not found');
-                AppState.isAnimating = false;
-                return;
-            }
-        
-            // Создаем подложку
-            AppState.backdrop = document.createElement('div');
-            AppState.backdrop.className = 'page-backdrop';
-            document.body.appendChild(AppState.backdrop);
-        
-            // Анимация главной страницы
-            animateElement(mainPage, {
-                opacity: 0,
-                transform: 'translateY(20px)'
-            }, 300, () => {
-                mainPage.style.display = 'none';
-                
-                // Показать целевую страницу
-                targetPage.style.display = 'block';
-                AppState.currentPage = targetPage;
-                
-                // Анимация появления
-                requestAnimationFrame(() => {
-                    AppState.backdrop.classList.add('backdrop-visible');
-                    animateElement(targetPage, {
-                        opacity: 1,
-                        transform: 'translateY(0)'
-                    }, 300, () => {
-                        AppState.isAnimating = false;
-                    });
+                card.addEventListener('click', function() {
+                    const galleryId = this.dataset.id;
+                    showPage('gallery', galleryId);
                 });
             });
+        
+            // Обработчик кнопки "Назад"
+            document.addEventListener('click', function(e) {
+                if(e.target.closest('.back-btn')) {
+                    e.preventDefault();
+                    hideCurrentPage();
+                }
+            });
+        });
+        
+        function showPage(type, id) {
+            // Скрыть главную страницу
+            document.getElementById('main-page').style.display = 'none';
+            
+            // Скрыть все страницы
+            document.querySelectorAll('.leader-page, .gallery-page').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Показать нужную страницу
+            const page = document.getElementById(`${type}-${id}`);
+            if(page) page.style.display = 'block';
         }
         
-        // Скрыть текущую страницу
         function hideCurrentPage() {
-            if (!AppState.currentPage || AppState.isAnimating) return;
-            AppState.isAnimating = true;
-        
-            // Анимации скрытия
-            animateElement(AppState.currentPage, {
-                opacity: 0,
-                transform: 'translateY(20px)'
-            }, 300);
+            // Скрыть все страницы
+            document.querySelectorAll('.leader-page, .gallery-page').forEach(page => {
+                page.style.display = 'none';
+            });
             
-            animateElement(AppState.backdrop, {
-                opacity: 0
-            }, 300, () => {
-                // Очистка после анимации
-                AppState.backdrop.remove();
-                AppState.backdrop = null;
-                
-                const mainPage = document.getElementById('main-page');
-                mainPage.style.display = 'block';
-                
-                // Анимация главной страницы
-                animateElement(mainPage, {
-                    opacity: 1,
-                    transform: 'translateY(0)'
-                }, 300, () => {
-                    AppState.currentPage.style.display = 'none';
-                    AppState.currentPage = null;
-                    AppState.isAnimating = false;
-                });
-            });
-        }
-        
-        // Универсальная функция анимации
-        function animateElement(element, properties, duration, callback) {
-            element.style.transition = `all ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-            
-            // Применение свойств
-            requestAnimationFrame(() => {
-                Object.keys(properties).forEach(prop => {
-                    element.style[prop] = properties[prop];
-                });
-            });
-        
-            // Очистка после завершения
-            setTimeout(() => {
-                element.style.transition = '';
-                if (callback) callback();
-            }, duration);
-        }
-        
-        // Анимации при скролле
-        function setupScrollAnimations() {
-            const animateElements = () => {
-                const elements = document.querySelectorAll('.animate-on-scroll');
-                const windowHeight = window.innerHeight;
-        
-                elements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    
-                    if (elementTop < windowHeight * 0.8) {
-                        element.classList.add('animated');
-                    }
-                });
-            };
-        
-            window.addEventListener('scroll', animateElements);
-            window.addEventListener('resize', animateElements);
-            animateElements(); // Инициализация
-        }
-        
-        // Инициализация переходов для карточек
-        function initializeCardTransitions() {
-            document.querySelectorAll('.card').forEach(card => {
-                card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-            });
+            // Показать главную страницу
+            document.getElementById('main-page').style.display = 'block';
         }
         // Управление отображением наград
         document.querySelectorAll('.toggle-awards-btn').forEach(btn => {
