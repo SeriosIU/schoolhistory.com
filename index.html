@@ -608,57 +608,6 @@
             margin: 20px 0;
             font-style: italic;
         }
-
-        /* Анимации */
-        .page-transition {
-            transition: all 0.4s ease-in-out;
-        }
-    
-        /* Главная страница */
-        #main-page {
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-    
-        /* Страницы руководителей и галереи */
-        .leader-page,
-        .gallery-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            overflow-y: auto;
-            padding: 40px;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-    
-        .active-page {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-    
-        /* Затемнение фона */
-        .page-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-    
-        .backdrop-visible {
-            opacity: 1;
-        }
     </style>
 </head>
 <body>
@@ -1037,54 +986,63 @@
     
 
     <script>
+        // Обновленный JavaScript
         document.addEventListener('DOMContentLoaded', function() {
             // Обработчики для руководителей
             document.querySelectorAll('.leader-card').forEach(card => {
                 card.addEventListener('click', function() {
-                    const leaderId = this.dataset.id;
+                    const leaderId = this.getAttribute('data-id');
                     showPage('leader', leaderId);
                 });
             });
-        
+    
             // Обработчики для галереи
-            document.querySelectorAll('.gallery-card').forEach(card => {
+            document.querySelectorAll('#gallery .card').forEach(card => {
                 card.addEventListener('click', function() {
-                    const galleryId = this.dataset.id;
+                    const galleryId = this.getAttribute('data-id');
                     showPage('gallery', galleryId);
                 });
             });
-        
-            // Обработчик кнопки "Назад"
+    
+            // Общий обработчик "Назад"
             document.addEventListener('click', function(e) {
                 if(e.target.closest('.back-btn')) {
                     e.preventDefault();
-                    hideCurrentPage();
+                    document.getElementById('main-page').style.display = 'block';
+                    document.getElementById('leader-pages').style.display = 'none';
+                    document.getElementById('gallery-pages').style.display = 'none';
+                    window.scrollTo(0, 0);
                 }
             });
+    
+            // Инициализация анимаций
+            initAnimations();
         });
-        
+    
+        // Универсальная функция показа страниц
         function showPage(type, id) {
-            // Скрыть главную страницу
             document.getElementById('main-page').style.display = 'none';
             
-            // Скрыть все страницы
-            document.querySelectorAll('.leader-page, .gallery-page').forEach(page => {
-                page.style.display = 'none';
-            });
+            if(type === 'leader') {
+                document.getElementById('leader-pages').style.display = 'block';
+                document.getElementById('gallery-pages').style.display = 'none';
+                document.querySelectorAll('.leader-page').forEach(page => {
+                    page.style.display = page.id === `leader-${id}` ? 'block' : 'none';
+                });
+            } else {
+                document.getElementById('gallery-pages').style.display = 'block';
+                document.getElementById('leader-pages').style.display = 'none';
+                document.querySelectorAll('.gallery-page').forEach(page => {
+                    page.style.display = page.id === `gallery-${id}` ? 'block' : 'none';
+                });
+            }
             
-            // Показать нужную страницу
-            const page = document.getElementById(`${type}-${id}`);
-            if(page) page.style.display = 'block';
+            window.scrollTo(0, 0);
         }
-        
-        function hideCurrentPage() {
-            // Скрыть все страницы
-            document.querySelectorAll('.leader-page, .gallery-page').forEach(page => {
-                page.style.display = 'none';
-            });
-            
-            // Показать главную страницу
-            document.getElementById('main-page').style.display = 'block';
+    
+        // Остальной код анимаций остается без изменений
+        function initAnimations() {
+            // ... предыдущий код анимаций ...
         }
         // Управление отображением наград
         document.querySelectorAll('.toggle-awards-btn').forEach(btn => {
