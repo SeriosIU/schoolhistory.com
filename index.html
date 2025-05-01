@@ -1037,60 +1037,6 @@
     
 
     <script>
-        // Обновленный JavaScript
-        document.addEventListener('DOMContentLoaded', function() {
-            // Обработчики для руководителей
-            document.querySelectorAll('.leader-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    const leaderId = this.getAttribute('data-id');
-                    showPage('leader', leaderId);
-                });
-            });
-    
-            // Обработчики для галереи
-            document.querySelectorAll('#gallery .card').forEach(card => {
-                card.addEventListener('click', function() {
-                    const galleryId = this.getAttribute('data-id');
-                    showPage('gallery', galleryId);
-                });
-            });
-    
-            // Общий обработчик "Назад"
-            document.addEventListener('click', function(e) {
-                if(e.target.closest('.back-btn')) {
-                    e.preventDefault();
-                    document.getElementById('main-page').style.display = 'block';
-                    document.getElementById('leader-pages').style.display = 'none';
-                    document.getElementById('gallery-pages').style.display = 'none';
-                    window.scrollTo(0, 0);
-                }
-            });
-    
-            // Инициализация анимаций
-            initAnimations();
-        });
-    
-        // Универсальная функция показа страниц
-        function showPage(type, id) {
-            document.getElementById('main-page').style.display = 'none';
-            
-            if(type === 'leader') {
-                document.getElementById('leader-pages').style.display = 'block';
-                document.getElementById('gallery-pages').style.display = 'none';
-                document.querySelectorAll('.leader-page').forEach(page => {
-                    page.style.display = page.id === `leader-${id}` ? 'block' : 'none';
-                });
-            } else {
-                document.getElementById('gallery-pages').style.display = 'block';
-                document.getElementById('leader-pages').style.display = 'none';
-                document.querySelectorAll('.gallery-page').forEach(page => {
-                    page.style.display = page.id === `gallery-${id}` ? 'block' : 'none';
-                });
-            }
-            
-            window.scrollTo(0, 0);
-        }
-
         // Управление отображением наград
         document.querySelectorAll('.toggle-awards-btn').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -1110,7 +1056,137 @@
             });
         });
         
-        // Анимации элементов
+        // Основной объект состояния приложения
+        const AppState = {
+            currentPage: null,
+            backdrop: null
+        };
+        
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            initEventListeners();
+            initAnimations();
+        });
+        
+        // Инициализация всех обработчиков событий
+        function initEventListeners() {
+            // Обработчики для карточек руководителей
+            document.querySelectorAll('.leader-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const leaderId = this.dataset.id;
+                    showPage('leader', leaderId);
+                });
+            });
+        
+            // Обработчики для карточек галереи
+            document.querySelectorAll('.gallery-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const galleryId = this.dataset.id;
+                    showPage('gallery', galleryId);
+                });
+            });
+        
+            // Общий обработчик для кнопок "Назад"
+            document.addEventListener('click', function(e) {
+                if(e.target.closest('.back-btn')) {
+                    e.preventDefault();
+                    hideCurrentPage();
+                }
+            });
+        
+            // Закрытие по клику на подложку
+            document.addEventListener('click', function(e) {
+                if(e.target.classList.contains('page-backdrop')) {
+                    hideCurrentPage();
+                }
+            });
+        }
+        
+        // Функция показа страницы
+        function showPage(pageType, pageId) {
+            const mainPage = document.getElementById('main-page');
+            const targetPageId = `${pageType}-${pageId}`;
+            const targetPage = document.getElementById(targetPageId);
+        
+            // Создаем подложку
+            AppState.backdrop = document.createElement('div');
+            AppState.backdrop.className = 'page-backdrop';
+            document.body.appendChild(AppState.backdrop);
+        
+            // Анимация исчезновения главной страницы
+            animateElement(mainPage, {
+                opacity: 0,
+                transform: 'translateY(20px)'
+            }, 300);
+        
+            // Анимация появления подложки
+            setTimeout(() => {
+                AppState.backdrop.classList.add('backdrop-visible');
+                
+                // Показываем целевую страницу
+                targetPage.style.display = 'block';
+                mainPage.style.display = 'none';
+        
+                // Анимация появления страницы
+                setTimeout(() => {
+                    targetPage.classList.add('active-page');
+                    AppState.currentPage = targetPage;
+                }, 50);
+            }, 300);
+        }
+        
+        // Функция скрытия текущей страницы
+        function hideCurrentPage() {
+            if(!AppState.currentPage) return;
+        
+            // Анимация исчезновения страницы
+            animateElement(AppState.currentPage, {
+                opacity: 0,
+                transform: 'translateY(20px)'
+            }, 300);
+        
+            // Анимация исчезновения подложки
+            AppState.backdrop.classList.remove('backdrop-visible');
+        
+            // Возвращаем главную страницу
+            const mainPage = document.getElementById('main-page');
+            
+            setTimeout(() => {
+                // Очищаем состояние
+                AppState.currentPage.style.display = 'none';
+                AppState.currentPage.classList.remove('active-page');
+                AppState.currentPage = null;
+                
+                if(AppState.backdrop) {
+                    AppState.backdrop.remove();
+                    AppState.backdrop = null;
+                }
+        
+                // Показываем главную страницу с анимацией
+                mainPage.style.display = 'block';
+                animateElement(mainPage, {
+                    opacity: 1,
+                    transform: 'translateY(0)'
+                }, 300);
+            }, 300);
+        }
+        
+        // Универсальная функция анимации
+        function animateElement(element, properties, duration) {
+            element.style.transition = `all ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+            
+            // Применяем свойства
+            Object.keys(properties).forEach(prop => {
+                element.style[prop] = properties[prop];
+            });
+        
+            // Сбрасываем transition после анимации
+            setTimeout(() => {
+                element.style.transition = '';
+            }, duration);
+        }
+        
+        // Инициализация анимаций карточек
         function initAnimations() {
             const animateCards = () => {
                 const cards = document.querySelectorAll('.card, .history-item');
@@ -1118,95 +1194,26 @@
                 
                 cards.forEach(card => {
                     const cardPosition = card.getBoundingClientRect().top;
-                    const animationPoint = windowHeight - 100;
                     
-                    if(cardPosition < animationPoint) {
+                    if(cardPosition < windowHeight * 0.8) {
                         card.style.opacity = '1';
                         card.style.transform = 'translateY(0)';
                     }
                 });
             };
-    
-            window.addEventListener('scroll', animateCards);
-            window.addEventListener('load', animateCards);
-    
-            // Изначальное состояние анимаций
+        
+            // Инициализация начального состояния
             document.querySelectorAll('.card, .history-item').forEach(card => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
                 card.style.transition = 'all 0.6s ease';
             });
+        
+            // Запуск при скролле и загрузке
+            window.addEventListener('scroll', animateCards);
+            window.addEventListener('resize', animateCards);
+            window.addEventListener('load', animateCards);
         }
-    
-        // Запуск при полной загрузке страницы
-        window.addEventListener('DOMContentLoaded', init);
-
-        // Запускаем анимации при прокрутке и при загрузке
-        window.addEventListener('scroll', animateCards);
-        window.addEventListener('load', animateCards);
-
-        // Модифицированная функция показа страниц
-        function showPage(type, id) {
-            const mainPage = document.getElementById('main-page');
-            const backdrop = document.createElement('div');
-            backdrop.className = 'page-backdrop';
-            
-            // Анимация исчезновения главной страницы
-            mainPage.style.opacity = '0';
-            mainPage.style.transform = 'translateY(20px)';
-            
-            // Показать backdrop
-            document.body.appendChild(backdrop);
-            setTimeout(() => backdrop.classList.add('backdrop-visible'), 10);
-    
-            // Показать целевую страницу
-            setTimeout(() => {
-                mainPage.style.display = 'none';
-                
-                const pageId = `${type}-${id}`;
-                const page = document.getElementById(pageId);
-                
-                page.style.display = 'block';
-                setTimeout(() => page.classList.add('active-page'), 10);
-            }, 300);
-        }
-    
-        // Модифицированный обработчик "Назад"
-        function hidePages() {
-            const activePage = document.querySelector('.active-page');
-            const backdrop = document.querySelector('.page-backdrop');
-            
-            if(activePage) {
-                // Анимация закрытия
-                activePage.classList.remove('active-page');
-                backdrop.classList.remove('backdrop-visible');
-                
-                setTimeout(() => {
-                    activePage.style.display = 'none';
-                    document.getElementById('main-page').style.display = 'block';
-                    
-                    // Анимация появления главной страницы
-                    setTimeout(() => {
-                        document.getElementById('main-page').style.opacity = '1';
-                        document.getElementById('main-page').style.transform = 'translateY(0)';
-                    }, 10);
-                    
-                    backdrop.remove();
-                }, 400);
-            }
-        }
-    
-        // Обновленный обработчик событий
-        document.addEventListener('DOMContentLoaded', function() {
-            // ... остальной код инициализации ...
-    
-            document.addEventListener('click', function(e) {
-                if(e.target.closest('.back-btn')) {
-                    e.preventDefault();
-                    hidePages();
-                }
-            });
-        });
     </script>
     <div id="gallery-pages">
         <!-- Страница галереи 1 -->
