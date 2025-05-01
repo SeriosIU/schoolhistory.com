@@ -1037,6 +1037,59 @@
     
 
     <script>
+        // Обновленный JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обработчики для руководителей
+            document.querySelectorAll('.leader-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const leaderId = this.getAttribute('data-id');
+                    showPage('leader', leaderId);
+                });
+            });
+    
+            // Обработчики для галереи
+            document.querySelectorAll('#gallery .card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const galleryId = this.getAttribute('data-id');
+                    showPage('gallery', galleryId);
+                });
+            });
+    
+            // Общий обработчик "Назад"
+            document.addEventListener('click', function(e) {
+                if(e.target.closest('.back-btn')) {
+                    e.preventDefault();
+                    document.getElementById('main-page').style.display = 'block';
+                    document.getElementById('leader-pages').style.display = 'none';
+                    document.getElementById('gallery-pages').style.display = 'none';
+                    window.scrollTo(0, 0);
+                }
+            });
+    
+            // Инициализация анимаций
+            initAnimations();
+        });
+    
+        // Универсальная функция показа страниц
+        function showPage(type, id) {
+            document.getElementById('main-page').style.display = 'none';
+            
+            if(type === 'leader') {
+                document.getElementById('leader-pages').style.display = 'block';
+                document.getElementById('gallery-pages').style.display = 'none';
+                document.querySelectorAll('.leader-page').forEach(page => {
+                    page.style.display = page.id === `leader-${id}` ? 'block' : 'none';
+                });
+            } else {
+                document.getElementById('gallery-pages').style.display = 'block';
+                document.getElementById('leader-pages').style.display = 'none';
+                document.querySelectorAll('.gallery-page').forEach(page => {
+                    page.style.display = page.id === `gallery-${id}` ? 'block' : 'none';
+                });
+            }
+            
+            window.scrollTo(0, 0);
+        }
         // Управление отображением наград
         document.querySelectorAll('.toggle-awards-btn').forEach(btn => {
             btn.addEventListener('click', function() {
