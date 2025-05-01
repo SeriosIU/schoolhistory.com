@@ -525,6 +525,24 @@
                 font-size: 1.2rem;
             }
         }
+        #photo-pages {
+            position: relative;
+            z-index: 1000;
+            background: white;
+            min-height: 100vh;
+        }
+
+        #leader-pages {
+            position: relative;
+            z-index: 1000;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .main-page-content {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
@@ -1060,33 +1078,38 @@
             });
         });
 
-        // Показать страницу с фото
         function showPhotoPage(photoId) {
-            // Скрыть главную страницу
+            // Скрываем ВСЕ основные разделы
             document.getElementById('main-page').style.display = 'none';
+            document.getElementById('leader-pages').style.display = 'none';
     
-            // Показать страницы с фото
+            // Показываем только фото-страницы
             document.getElementById('photo-pages').style.display = 'block';
     
-            // Скрыть все страницы фото
+            // Скрываем все фото-страницы кроме нужной
             document.querySelectorAll('.photo-page').forEach(page => {
-                page.style.display = 'none';
+                page.style.display = page.id === `photo-${photoId}` ? 'block' : 'none';
             });
     
-            // Показать нужную страницу
-            document.getElementById(`photo-${photoId}`).style.display = 'block';
-    
-            // Прокрутка вверх
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo(0, 0);
         }
 
-        // Обработчик кнопки "Назад"
-        document.querySelectorAll('.photo-page .back-btn').forEach(btn => {
+        function backToMain() {
+            // Показываем основной контент
+            document.getElementById('main-page').style.display = 'block';
+            // Скрываем все дополнительные страницы
+            document.getElementById('photo-pages').style.display = 'none';
+            document.getElementById('leader-pages').style.display = 'none';
+    
+            // Прокрутка к разделу галереи
+            document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Обновленные обработчики
+        document.querySelectorAll('.back-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.getElementById('main-page').style.display = 'block';
-                document.getElementById('photo-pages').style.display = 'none';
-                document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+                backToMain();
             });
         });
     </script>
