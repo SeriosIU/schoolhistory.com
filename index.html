@@ -397,193 +397,57 @@
                 max-width: 100%;
             }
         }
-            /* Стили для страниц фото (аналогично директорам) */
-        .gallery-grid {
+
+        #gallery-pages {
+            display: none;
+            padding: 80px 20px;
+        }
+        
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .main-photo img {
+            width: 100%;
+            max-height: 600px;
+            object-fit: contain;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .additional-photos {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
         }
 
-        .gallery-item {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            transform: translateY(0);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            background: #fff;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-        }
-
-        .gallery-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        .photo-item img {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 100%);
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
-        }
-
-        .gallery-item:hover::before {
-            opacity: 1;
-        }
-
-        .gallery-img {
-            position: relative;
-            height: 320px;
-            overflow: hidden;
-        }
-
-        .gallery-img img {
-            width: 100%;
-            height: 100%;
+            height: 200px;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
-        .gallery-item:hover .gallery-img img {
+        .photo-item img:hover {
             transform: scale(1.05);
         }
 
-        .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 24px;
-            color: white;
-            z-index: 2;
-            transform: translateY(100%);
-            opacity: 0;
-            transition: all 0.3s ease;
+        .gallery-description {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 20px;
         }
 
-        .gallery-item:hover .gallery-caption {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .gallery-caption h3 {
-            font-size: 1.4rem;
-            margin-bottom: 8px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .gallery-caption p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            line-height: 1.4;
-        }
-
-        /* Эффект блеска при наведении */
-        .gallery-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(
-                to right,
-                rgba(255,255,255,0) 0%,
-                rgba(255,255,255,0.15) 50%,
-                rgba(255,255,255,0) 100%
-            );
-            transform: skewX(-25deg);
-            transition: left 0.6s ease;
-        }
-
-        .gallery-item:hover::after {
-            left: 150%;
-        }
-
-        @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-    
-            .gallery-img {
-                height: 260px;
-            }
-    
-            .gallery-caption {
-                padding: 18px;
-            }
-    
-            .gallery-caption h3 {
-                font-size: 1.2rem;
-            }
-        }
-        #photo-pages {
-            position: relative;
-            z-index: 1000;
-            background: white;
-            min-height: 100vh;
-        }
-
-        #leader-pages {
-            position: relative;
-            z-index: 1000;
-            background: white;
-            min-height: 100vh;
-        }
-
-        .main-page-content {
-            position: relative;
-            z-index: 1;
-        }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 20px;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            transform: translateY(0);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            background: #fff;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-        }
-        #fullpage-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            z-index: 10000;
-            overflow-y: auto;
-            display: none;
-        }
-
-        .photo-pages-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .photo-page {
-            display: none;
-        }
-
-        .photo-page.active {
-            display: block;
+        .gallery-details {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -732,29 +596,25 @@
                 <h2>Фотоархив школы</h2>
             </div>
             <div class="gallery-grid">
-                <!-- Фото 1 -->
-                <div class="gallery-item" data-photo="1">
-                    <div class="gallery-img">
-                        <img src="https://i.postimg.cc/vHKjtbx0/image.png" alt="Школа 1980-е">
+                <div class="card" data-gallery-id="1">
+                    <div class="card-img">
+                        <img src="https://i.postimg.cc/vHKjtbx0/image.png" alt="Принятие школы">
                     </div>
-                    <div class="gallery-caption">
+                    <div class="card-content">
                         <h3>1980-е годы</h3>
                         <p>Принятие школы</p>
                     </div>
                 </div>
-
-                <!-- Фото 2 -->
-                <div class="gallery-item" data-photo="2">
-                    <div class="gallery-img">
+                <div class="card" data-gallery-id="2">
+                    <div class="card-img">
                         <img src="https://i.postimg.cc/mhfGnf29/image.png" alt="Коллектив">
                     </div>
-                    <div class="gallery-caption">
+                    <div class="card-content">
                         <h3>1986 год</h3>
-                        <p>Педагогический состав</p>
+                        <p>Состав школы с шефами Ольжерасского разреза</p>
                     </div>
                 </div>
-            </div>
-                <div class="card">
+                <div class="card" data-gallery-id="3">
                     <div class="card-img">
                         <img src="https://i.postimg.cc/YSwzCXjx/1986-1987-2-1.png" alt="Выпуск 86-87 года">
                     </div>
@@ -763,7 +623,7 @@
                         <p>Выпускной класс</p>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" data-gallery-id="4">
                     <div class="card-img">
                         <img src="https://i.postimg.cc/2Sc5wqFP/1988.png" alt="Выпуск 88го">
                     </div>
@@ -772,7 +632,7 @@
                         <p>Выпускной класс</p>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" data-gallery-id="5">
                     <div class="card-img">
                         <img src="https://i.postimg.cc/Sx1gQLCT/image.png" alt="Урок технологии">
                     </div>
@@ -781,7 +641,7 @@
                         <p>Урок технологии</p>
                     </div>
                 </div> 
-                <div class="card">
+                <div class="card" data-gallery-id="6">
                     <div class="card-img">
                         <img src="https://i.postimg.cc/7Ys3SHhb/2000.png" alt="День учителя">
                     </div>
@@ -791,7 +651,16 @@
                     </div>
                 </div>
             </div>
+            <div id="gallery-pages">
+                <div class="gallery-page" id="gallery-1"></div>
+                <div class="gallery-page" id="gallery-2"></div>
+                <div class="gallery-page" id="gallery-3"></div>
+                <div class="gallery-page" id="gallery-4"></div>
+                <div class="gallery-page" id="gallery-5"></div>
+                <div class="gallery-page" id="gallery-6"></div>
+            </div>
         </section>
+        
         <section id="olympiad">
             <div class="olympiad">
                 <h2>Олимпиада развивающего обучения</h2>
@@ -963,59 +832,7 @@
             </div>
         </div>
     </div>
-    <div id="photo-pages">
-        <!-- Страница фото 1 -->
-        <div class="photo-page" id="photo-1">
-            <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i> Назад в галерею</a>
-            <div class="photo-header">
-                <div class="main-photo">
-                    <img src="https://i.postimg.cc/vHKjtbx0/image.png" alt="Основное фото">
-                </div>
-                <div class="photo-info">
-                    <h2>1980-е годы - Принятие школы</h2>
-                    <div class="photo-description">
-                        <p><strong>Дата:</strong> 1986 год</p>
-                        <p><strong>Описание:</strong> Историческое фото первого здания школы</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Страница фото 2 -->
-        <div class="photo-page" id="photo-2">
-            <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i> Назад в галерею</a>
-            <div class="photo-header">
-                <div class="main-photo">
-                    <img src="https://i.postimg.cc/mhfGnf29/image.png" alt="Основное фото">
-                </div>
-                <div class="photo-info">
-                    <h2>1986 год - Педагогический состав</h2>
-                    <div class="photo-description">
-                        <p><strong>Дата:</strong> 1986 год</p>
-                        <p><strong>Описание:</strong> Первый педагогический коллектив школы</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="fullpage-overlay">
-        <div class="photo-pages-container">
-            <div class="photo-page" id="photo-1">
-                <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i> Назад</a>
-                <div class="photo-content">
-                    <img src="https://i.postimg.cc/vHKjtbx0/image.png" class="main-photo" alt="Основное фото">
-                    <div class="photo-info">
-                        <h2>1980-е годы - Принятие школы</h2>
-                        <div class="photo-description">
-                            <p><strong>Дата:</strong> 1986 год</p>
-                            <p><strong>Описание:</strong> Историческое фото первого здания школы</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Другие страницы с фото -->
-        </div>
-    </div>
     <script>
         // Данные о руководителях
         const leadersData = {
@@ -1129,82 +946,71 @@
         window.addEventListener('scroll', animateCards);
         window.addEventListener('load', animateCards);
 
+        // Данные для галерей
+        const galleryData = {
+            1: {
+                title: "1980-е годы",
+                description: "Принятие школы в эксплуатацию",
+                mainPhoto: "https://i.postimg.cc/vHKjtbx0/image.png",
+                photos: [
+                    "https://i.postimg.cc/vHKjtbx0/image.png",
+                    "https://example.com/photo2.jpg",
+                    "https://example.com/photo3.jpg"
+                ],
+                details: "Подробное описание события или фотографии..."
+            },
+            // Добавьте аналогичные объекты для других галерей
+        };
 
-
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const photoId = this.dataset.photo;
-                showPhotoPage(photoId);
+        // Обработка кликов на карточки галереи
+        document.querySelectorAll('#gallery .card').forEach(card => {
+            card.addEventListener('click', function() {
+                const galleryId = this.getAttribute('data-gallery-id');
+                showGalleryPage(galleryId);
             });
         });
 
-        function showPhotoPage(photoId) {
-            // Скрываем ВСЕ основные разделы
+        // Показать страницу галереи
+        function showGalleryPage(galleryId) {
             document.getElementById('main-page').style.display = 'none';
-            document.getElementById('leader-pages').style.display = 'none';
-    
-            // Показываем только фото-страницы
-            document.getElementById('photo-pages').style.display = 'block';
-    
-            // Скрываем все фото-страницы кроме нужной
-            document.querySelectorAll('.photo-page').forEach(page => {
-                page.style.display = page.id === `photo-${photoId}` ? 'block' : 'none';
-            });
-    
+            document.getElementById('gallery-pages').style.display = 'block';
+            const gallery = galleryData[galleryId];
+        
+            const galleryPage = document.getElementById(`gallery-${galleryId}`);
+            galleryPage.innerHTML = `
+                <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i>Назад в архив</a>
+                <div class="gallery-container">
+                    <h2>${gallery.title}</h2>
+                    <p class="gallery-description">${gallery.description}</p>
+                    <div class="main-photo">
+                        <img src="${gallery.mainPhoto}" alt="${gallery.title}">
+                    </div>
+                    <div class="gallery-details">
+                        <p>${gallery.details}</p>
+                    </div>
+                    <div class="additional-photos">
+                        ${gallery.photos.map(photo => `
+                            <div class="photo-item">
+                                <img src="${photo}" alt="Дополнительное фото">
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        
+            galleryPage.style.display = 'block';
             window.scrollTo(0, 0);
         }
 
-        function backToMain() {
-            // Показываем основной контент
-            document.getElementById('main-page').style.display = 'block';
-            // Скрываем все дополнительные страницы
-            document.getElementById('photo-pages').style.display = 'none';
-            document.getElementById('leader-pages').style.display = 'none';
-    
-            // Прокрутка к разделу галереи
-            document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Обновленные обработчики
-        document.querySelectorAll('.back-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
+        // Кнопка "Назад" для галерей
+        document.addEventListener('click', function(e) {
+            if(e.target.closest('.back-btn')) {
                 e.preventDefault();
-                backToMain();
-            });
+                document.getElementById('main-page').style.display = 'block';
+                document.getElementById('gallery-pages').style.display = 'none';
+                document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+            }
         });
-        // Обработчики событий
-        document.addEventListener('DOMContentLoaded', () => {
-            // Открытие фото
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const photoId = this.dataset.photo;
-                    showPhotoPage(photoId);
-                });
-            });
-
-            // Закрытие фото
-            document.querySelectorAll('.back-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    hidePhotoPages();
-                });
-            });
-        });
-
-        function showPhotoPage(photoId) {
-            document.body.style.overflow = 'hidden';
-            const overlay = document.getElementById('fullpage-overlay');
-            overlay.style.display = 'block';
-            document.querySelectorAll('.photo-page').forEach(page => {
-                page.classList.toggle('active', page.id === `photo-${photoId}`);
-            });
-        }
-
-        function hidePhotoPages() {
-            document.getElementById('fullpage-overlay').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
     </script>
 </body>
 </html>
