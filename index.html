@@ -255,13 +255,6 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         
-        .leader-page {
-            display: none;
-            padding: 80px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
         .leader-header {
             display: flex;
             flex-wrap: wrap;
@@ -614,6 +607,57 @@
             border-left: 4px solid var(--accent);
             margin: 20px 0;
             font-style: italic;
+        }
+
+        /* Анимации */
+        .page-transition {
+            transition: all 0.4s ease-in-out;
+        }
+    
+        /* Главная страница */
+        #main-page {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+    
+        /* Страницы руководителей и галереи */
+        .leader-page,
+        .gallery-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            overflow-y: auto;
+            padding: 40px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    
+        .active-page {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    
+        /* Затемнение фона */
+        .page-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+    
+        .backdrop-visible {
+            opacity: 1;
         }
     </style>
 </head>
@@ -1100,7 +1144,69 @@
         // Запускаем анимации при прокрутке и при загрузке
         window.addEventListener('scroll', animateCards);
         window.addEventListener('load', animateCards);
-        
+
+        // Модифицированная функция показа страниц
+        function showPage(type, id) {
+            const mainPage = document.getElementById('main-page');
+            const backdrop = document.createElement('div');
+            backdrop.className = 'page-backdrop';
+            
+            // Анимация исчезновения главной страницы
+            mainPage.style.opacity = '0';
+            mainPage.style.transform = 'translateY(20px)';
+            
+            // Показать backdrop
+            document.body.appendChild(backdrop);
+            setTimeout(() => backdrop.classList.add('backdrop-visible'), 10);
+    
+            // Показать целевую страницу
+            setTimeout(() => {
+                mainPage.style.display = 'none';
+                
+                const pageId = `${type}-${id}`;
+                const page = document.getElementById(pageId);
+                
+                page.style.display = 'block';
+                setTimeout(() => page.classList.add('active-page'), 10);
+            }, 300);
+        }
+    
+        // Модифицированный обработчик "Назад"
+        function hidePages() {
+            const activePage = document.querySelector('.active-page');
+            const backdrop = document.querySelector('.page-backdrop');
+            
+            if(activePage) {
+                // Анимация закрытия
+                activePage.classList.remove('active-page');
+                backdrop.classList.remove('backdrop-visible');
+                
+                setTimeout(() => {
+                    activePage.style.display = 'none';
+                    document.getElementById('main-page').style.display = 'block';
+                    
+                    // Анимация появления главной страницы
+                    setTimeout(() => {
+                        document.getElementById('main-page').style.opacity = '1';
+                        document.getElementById('main-page').style.transform = 'translateY(0)';
+                    }, 10);
+                    
+                    backdrop.remove();
+                }, 400);
+            }
+        }
+    
+        // Обновленный обработчик событий
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... остальной код инициализации ...
+    
+            document.addEventListener('click', function(e) {
+                if(e.target.closest('.back-btn')) {
+                    e.preventDefault();
+                    hidePages();
+                }
+            });
+        });
     </script>
     <div id="gallery-pages">
         <!-- Страница галереи 1 -->
