@@ -543,6 +543,48 @@
             position: relative;
             z-index: 1;
         }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            background: #fff;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        #fullpage-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 10000;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .photo-pages-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .photo-page {
+            display: none;
+        }
+
+        .photo-page.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -956,6 +998,24 @@
             </div>
         </div>
     </div>
+    <div id="fullpage-overlay">
+        <div class="photo-pages-container">
+            <div class="photo-page" id="photo-1">
+                <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i> Назад</a>
+                <div class="photo-content">
+                    <img src="https://i.postimg.cc/vHKjtbx0/image.png" class="main-photo" alt="Основное фото">
+                    <div class="photo-info">
+                        <h2>1980-е годы - Принятие школы</h2>
+                        <div class="photo-description">
+                            <p><strong>Дата:</strong> 1986 год</p>
+                            <p><strong>Описание:</strong> Историческое фото первого здания школы</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Другие страницы с фото -->
+        </div>
+    </div>
     <script>
         // Данные о руководителях
         const leadersData = {
@@ -1112,6 +1172,39 @@
                 backToMain();
             });
         });
+        // Обработчики событий
+        document.addEventListener('DOMContentLoaded', () => {
+            // Открытие фото
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const photoId = this.dataset.photo;
+                    showPhotoPage(photoId);
+                });
+            });
+
+            // Закрытие фото
+            document.querySelectorAll('.back-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    hidePhotoPages();
+                });
+            });
+        });
+
+        function showPhotoPage(photoId) {
+            document.body.style.overflow = 'hidden';
+            const overlay = document.getElementById('fullpage-overlay');
+            overlay.style.display = 'block';
+            document.querySelectorAll('.photo-page').forEach(page => {
+                page.classList.toggle('active', page.id === `photo-${photoId}`);
+            });
+        }
+
+        function hidePhotoPages() {
+            document.getElementById('fullpage-overlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     </script>
 </body>
 </html>
