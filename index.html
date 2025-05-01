@@ -449,6 +449,77 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             margin: 20px 0;
         }
+        .gallery-container h2 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        .gallery-container ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        .gallery-container li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .gallery-container blockquote {
+            background-color: var(--light);
+            border-left: 4px solid var(--accent);
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .historical-fact {
+            background-color: #fff8e1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ffd700;
+        }
+        
+        .fact-title {
+            color: var(--dark);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+            padding-left: 20px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: var(--accent);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            background-color: var(--primary);
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
@@ -949,17 +1020,60 @@
         // Данные для галерей
         const galleryData = {
             1: {
-                title: "1980-е годы",
-                description: "Принятие школы в эксплуатацию",
+                title: "1986 год - Открытие школы",
+                description: "Первые дни работы образовательного учреждения",
                 mainPhoto: "https://i.postimg.cc/vHKjtbx0/image.png",
                 photos: [
-                    "https://i.postimg.cc/vHKjtbx0/image.png",
-                    "https://example.com/photo2.jpg",
-                    "https://example.com/photo3.jpg"
+                    "https://i.postimg.cc/mhfGnf29/image.png",
+                    "https://i.postimg.cc/YSwzCXjx/1986-1987-2-1.png",
+                    "https://i.postimg.cc/Sx1gQLCT/image.png"
                 ],
-                details: "Подробное описание события или фотографии..."
+                details: `<p>Торжественное открытие школы состоялось 1 сентября 1986 года. На фотографиях:</p>
+                          <ul>
+                            <li>Первый педагогический состав</li>
+                            <li>Вручение символического ключа от школы</li>
+                            <li>Занятия в новых кабинетах</li>
+                          </ul>
+                          <p>Из воспоминаний учителя истории Петровой И.Н.: "Мы получили современное здание 
+                          с просторными классами и новой мебелью. Особой гордостью были лаборатории 
+                          химии и физики с самым современным оборудованием того времени"</p>`
             },
-            // Добавьте аналогичные объекты для других галерей
+            2: {
+                title: "1990-е - Школьные традиции",
+                description: "Ежегодный смотр строя и песни",
+                mainPhoto: "https://i.postimg.cc/2Sc5wqFP/1988.png",
+                photos: [
+                    "https://i.postimg.cc/7Ys3SHhb/2000.png",
+                    "https://example.com/photo1992-1.jpg",
+                    "https://example.com/photo1992-2.jpg"
+                ],
+                details: `<p>Традиционный праздник, посвященный Дню Победы. Особенности:</p>
+                        <ul>
+                            <li>Подготовка длилась 2 месяца</li>
+                            <li>Участвовали все классы с 5 по 11</li>
+                            <li>Жюри оценивало строевую подготовку и исполнение военных песен</li>
+                        </ul>
+                        <p>Победители 1994 года - 8Б класс получил переходящий кубок 
+                        из рук ветерана Великой Отечественной войны Иванова П.С.</p>`
+            },
+            3: {
+                title: "2000-е - Современные технологии",
+                description: "Первый компьютерный класс",
+                mainPhoto: "https://i.postimg.cc/7Ys3SHhb/2000.png",
+                photos: [
+                    "https://example.com/comp1.jpg",
+                    "https://example.com/comp2.jpg",
+                    "https://example.com/comp3.jpg"
+                ],
+                details: `<p>2003 год - школа получила грант на создание компьютерного класса:</p>
+                        <ul>
+                            <li>12 современных компьютеров Pentium IV</li>
+                            <li>Интерактивная доска</li>
+                            <li>Цифровая лаборатория по физике</li>
+                        </ul>
+                        <p>Учитель информатики Сидоров А.В.: "Для нас это была настоящая революция! 
+                        Дети начали изучать основы программирования и компьютерной графики"</p>`
+            }
         };
 
         // Обработка кликов на карточки галереи
