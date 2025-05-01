@@ -1267,6 +1267,35 @@
             window.addEventListener('resize', animateCards);
             window.addEventListener('load', animateCards);
         }
+
+        // Обработчики для галереи
+        document.querySelectorAll('.gallery-preview').forEach(preview => {
+            preview.addEventListener('click', function(e) {
+                e.preventDefault();
+                const galleryId = this.dataset.gallery;
+                document.getElementById(galleryId).style.display = 'block';
+                document.getElementById('gallery').style.overflow = 'hidden';
+            });
+        });
+    
+        // Кнопка "Назад"
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.closest('.gallery-fullpage').style.display = 'none';
+                document.getElementById('gallery').style.overflow = 'auto';
+            });
+        });
+    
+        // Закрытие по клику вне контента
+        document.querySelectorAll('.gallery-fullpage').forEach(gallery => {
+            gallery.addEventListener('click', function(e) {
+                if(e.target === this) {
+                    this.style.display = 'none';
+                    document.getElementById('gallery').style.overflow = 'auto';
+                }
+            });
+        });
     </script>
     <div id="gallery-pages">
         <!-- Страница галереи 1 -->
