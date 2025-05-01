@@ -1046,7 +1046,26 @@
             
             window.scrollTo(0, 0);
         }
-    
+
+        // Управление отображением наград
+        document.querySelectorAll('.toggle-awards-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const container = this.closest('.awards-container');
+                const preview = container.querySelector('.awards-preview');
+                const full = container.querySelector('.awards-full');
+                
+                if (full.style.display === 'none' || !full.style.display) {
+                    full.style.display = 'inline';
+                    preview.style.display = 'none';
+                    this.textContent = 'Свернуть награды';
+                } else {
+                    full.style.display = 'none';
+                    preview.style.display = 'inline';
+                    this.textContent = 'Показать все награды';
+                }
+            });
+        });
+        
         // Анимации элементов
         function initAnimations() {
             const animateCards = () => {
