@@ -1107,19 +1107,6 @@
                 }
             });
         });
-        
-        // Остальные функции остаются без изменений
-        function showPage(type, id) {
-            document.getElementById('main-page').style.display = 'none';
-            document.getElementById(`${type}-${id}`).style.display = 'block';
-        }
-        
-        function hideCurrentPage() {
-            document.querySelectorAll('.leader-page, .gallery-page').forEach(page => {
-                page.style.display = 'none';
-            });
-            document.getElementById('main-page').style.display = 'block';
-        }
     </script>
     <div id="gallery-pages">
         <!-- Страница галереи 1 -->
